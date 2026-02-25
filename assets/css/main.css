@@ -1,0 +1,442 @@
+:root {
+  --vanilla: #F3D5BA;
+  --dark_blue: #001D62;
+  --blue: #5C8AA7;
+  --light_blue: #C3DFF1;
+  --blue-very-light: #e3f2fd;
+  --pink: #D18FA1;
+  --card-right-pad: 14px;
+}
+
+/* ========= 全域字體與盒模型設定 =========== */
+* {
+  font-family: "Jersey 15", Helvetica, Arial, sans-serif;
+  box-sizing: border-box;
+  /* 🎯 Ensure padding doesn't affect width */
+}
+
+h1:focus {
+  outline: 2px solid #0b5fff;
+}
+
+
+/* ========= 基礎設定 =========== */
+html,
+body {
+  min-height: 100vh;
+  width: 100%;
+  margin: 0;
+  overflow-x: hidden;
+}
+
+body {
+  min-height: 100vh;
+  /* background-size: cover;
+  background-repeat: no-repeat; */
+  font-family: "Jersey 15", Helvetica, Arial, sans-serif;
+  font-size: 18px;
+}
+
+.page-layout {
+  display: flex;
+  flex-direction: column;
+  /* 🎯 Stack content vertically */
+  align-items: center;
+  /* 🎯 Horizontal centering */
+  justify-content: flex-start;
+  /* 🎯 Start from top */
+
+  /* 🎯 背景通用設定 */
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-attachment: fixed;
+}
+
+/* ========= 靜態頁面：置中且固定高度 =========== */
+#menu.page-layout,
+#about_taiwan.page-layout,
+#about_us.page-layout {
+  height: 100vh;
+  /* 固定高度 */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* 🎯 Horizontal center */
+  justify-content: center;
+  /* 🎯 Vertical center */
+  background-image: url('../images/start.png');
+}
+
+/* ========= 結尾頁面：置中且全 Vanilla 背景 =========== */
+#end-page.page-layout,
+#email-page.page-layout {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--vanilla);
+  background-image: none !important;
+}
+
+/* ========= 列表頁面：可滾動且從頂部開始 =========== */
+#must_eat.page-layout,
+#diet.page-layout,
+#meat.page-layout,
+#veggie.page-layout,
+#seafood.page-layout,
+#halalfood.page-layout,
+#must_see.page-layout,
+#points.page-layout {
+  min-height: 100vh;
+  /* 允許內容撐大頁面並滾動 */
+
+  /* 🎯 關鍵修正：讓內容從容器的頂部開始排列 */
+  align-items: flex-start;
+
+  /* 🎯 增加頂部和底部的邊距，防止內容緊貼視窗邊緣 */
+  padding-top: 80px;
+  /* 🎯 Increased to clear fixed back button */
+  padding-bottom: 40px;
+
+  background-image: url('../images/city.png');
+}
+
+#travel-style.page-layout {
+  min-height: 100vh;
+  align-items: flex-start;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  background-image: url('../images/nature.png');
+}
+
+#tours-page.page-layout,
+#result-page.page-layout {
+  min-height: 100vh;
+  align-items: flex-start;
+  padding-top: 80px;
+  padding-bottom: 40px;
+  background-color: var(--vanilla);
+  background-image: none !important;
+}
+
+#must_eat,
+#diet,
+#meat,
+#veggie,
+#seafood,
+#halalfood,
+#Foods {
+  background-image: url('../images/food.png') !important;
+}
+
+#day_input {
+  background: url('../images/culture.png') center / cover no-repeat fixed;
+}
+
+#result {
+  background: url('../images/relaxation.png') center / cover no-repeat fixed;
+}
+
+/* ========= Shared Layout Components =========== */
+.header-section {
+  text-align: left;
+  margin-bottom: 16px;
+  /* 🎯 Tightened from 24px */
+  width: 100%;
+}
+
+.title {
+  font-family: 'Jersey 15', sans-serif;
+  font-size: clamp(2.2rem, 8vw, 2.8rem);
+  color: var(--dark_blue);
+  margin-bottom: 10px;
+  line-height: 1.1;
+}
+
+.subtitle {
+  font-size: 1.5rem !important;
+  color: #666;
+  line-height: 1.3;
+  margin: 0;
+}
+
+.section-title {
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 1.8rem;
+  color: var(--pink);
+  margin-bottom: 15px;
+  border-bottom: 2px solid var(--pink);
+  display: inline-block;
+}
+
+
+/* ========= Frame =========== */
+/* Using max-width + width: 100% + padding for better RWD than width: 90% */
+.frame {
+  width: 100%;
+  max-width: 500px;
+  padding: 0 20px;
+  /* 🎯 Base horizontal padding for all frames */
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+  /* 🎯 Reduced gap from 18px */
+  margin: 0 auto;
+  position: relative;
+  color: var(--vanilla);
+  font-family: "Jersey 15", Helvetica, Arial, sans-serif;
+}
+
+.frame-border {
+  position: relative;
+  padding: 6px;
+  border-top: 4px solid var(--dark_blue);
+  border-bottom: 8px solid var(--dark_blue);
+  border-left: 4px solid var(--dark_blue);
+  border-right: 8px solid var(--dark_blue);
+  background: var(--blue);
+}
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.panel-header {
+  background: var(--pink);
+  border: 4px solid var(--dark_blue);
+  color: var(--dark_blue);
+  padding: 8px 14px;
+  /* 🎯 Reduced padding */
+  display: flex;
+  align-items: center;
+}
+
+.panel-header h1 {
+  margin: 0;
+  font-size: clamp(22px, 5vw, 28px);
+  font-weight: 400;
+  line-height: 1.3;
+  color: var(--dark_blue);
+}
+
+.panel-body {
+  background: var(--vanilla);
+  border: 4px solid var(--dark_blue);
+  color: var(--dark_blue);
+  padding: 10px 15px;
+  /* 🎯 Reduced padding */
+}
+
+.panel-body p {
+  margin: 0;
+  font-size: clamp(17px, 4vw, 20px);
+  line-height: 1.5;
+}
+
+.lightnote {
+  color: var(--blue);
+  margin-top: 4px;
+  /* 🎯 Small spacing since <br> was removed */
+  font-size: 0.95rem;
+}
+
+/* ========= Options & Buttons =========== */
+.options {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  /* 🎯 Reduced gap from 10px */
+}
+
+.option-btn {
+  appearance: none;
+  -webkit-appearance: none;
+  display: block;
+  width: 100%;
+  padding: 10px 16px;
+  /* 🎯 Reduced padding from 16x 20px */
+  border: 4px solid var(--dark_blue);
+  background: var(--light_blue);
+  color: var(--dark_blue);
+  cursor: pointer;
+  text-align: left;
+  font-size: clamp(18px, 4vw, 22px);
+  line-height: 1.4;
+  box-sizing: border-box;
+  font-family: "Jersey 15", Helvetica, Arial, sans-serif;
+}
+
+.option-btn * {
+  color: inherit;
+}
+
+
+.option-btn:hover {
+  background: var(--vanilla);
+}
+
+.option-btn:focus-visible {
+  outline: 3px solid color-mix(in oklab, var(--dark_blue), white 20%);
+  outline-offset: 2px;
+}
+
+.option-btn:active {
+  transform: translateY(1px);
+}
+
+.option-btn.is-toggle[aria-pressed="true"] {
+  background: var(--vanilla);
+  box-shadow: inset 0 0 0 2px color-mix(in oklab, var(--dark_blue), white 35%);
+}
+
+.option-btn.primary {
+  background: var(--pink);
+  text-align: center;
+}
+
+.option-btn:disabled {
+  opacity: .55;
+  cursor: not-allowed;
+}
+
+
+
+
+
+
+
+/* ========= Result Page =========== */
+.generated-prompt {
+  background: color-mix(in oklab, var(--dark_blue) 40%, transparent);
+  border: 4px solid var(--vanilla);
+  padding: 22px;
+  margin-bottom: 20px;
+}
+
+.prompt-text {
+  padding: 18px;
+  margin-bottom: 16px;
+  color: white;
+  font-size: clamp(17px, 4vw, 19px);
+  line-height: 1.7;
+  word-wrap: break-word;
+  font-family: "Jersey 15", Helvetica, Arial, sans-serif;
+}
+
+.copy-btn {
+  background: var(--blue);
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  cursor: pointer;
+  font-size: clamp(17px, 4vw, 20px);
+  transition: background-color 0.3s ease;
+  font-family: "Jersey 15", Helvetica, Arial, sans-serif;
+}
+
+.copy-btn:hover {
+  background: var(--dark_blue);
+}
+
+
+
+/* ========= Footer =========== */
+footer {
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  padding: 6px 16px;
+  /* Reduced padding */
+  text-align: center;
+  z-index: 998;
+  background: rgba(0, 0, 0, 0.8);
+  /* Semi-transparent Black */
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+footer p {
+  margin: 0;
+  font-weight: 400;
+  color: var(--vanilla);
+  font-size: clamp(13px, 3vw, 15px);
+  letter-spacing: 0.02em;
+  line-height: normal;
+  font-family: "Jersey 15", Helvetica, Arial, sans-serif;
+}
+
+/* ========= 移除 list margin =========== */
+#see_list,
+#eat_list,
+#food_list {
+  margin: 0;
+}
+
+/* ========= Grid & Button Layouts (Shared) =========== */
+.wishcard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  /* Unified gap */
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .wishcard-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+  }
+}
+
+.button-container {
+  margin-top: 40px;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+}
+
+/* ========= 響應式 =========== */
+@media (max-width: 480px) {
+  .frame {
+    width: 90%;
+    /* 🎯 Slightly wider for mobile */
+    max-width: none;
+    padding: 0 10px;
+    /* 🎯 Narrower horizontal padding */
+    gap: 10px;
+  }
+
+  body {
+    font-size: 16px;
+    /* 🎯 Slightly smaller font */
+  }
+
+  .panel-header {
+    padding: 6px 12px;
+  }
+
+  .panel-body {
+    padding: 8px 12px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 768px) {
+  .frame {
+    width: 85%;
+    max-width: 600px;
+  }
+}
+
+@media (min-width: 769px) {
+  .frame {
+    width: 80%;
+    max-width: 700px;
+  }
+}

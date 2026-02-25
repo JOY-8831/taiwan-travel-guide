@@ -1,0 +1,31 @@
+Step	Category	Sub_category	Region	Number	Code	Name_EN	Name_CH	details	Source	Special
+F	E			1	F-E-1	Traditional Breakfast 傳統早餐		A classic Taiwanese breakfast usually includes warm soy milk (豆漿) paired with crispy baked flatbread (燒餅) or a chewy egg crepe (蛋餅). It’s simple, comforting, and a must-try way to start the day like a local.		
+F	E			2	F-E-2	Bubble Milk Tea 珍珠奶茶		Most famous drink in Taiwan with milk tea and chewy tapioca pearls. Sweet, fun, and customizable, it’s a global icon that started on the island.”		
+F	E			3	F-E-3	Stinky Tofu 臭豆腐		Taiwan’s most iconic street food — it smells bold but tastes surprisingly delicious, crispy outside and tender inside. Dare to try it, and you might just get hooked!		
+F	E			4	F-E-4	Tofu Pudding 豆花		Douhua is a silky tofu pudding served with sweet syrup and toppings like peanuts or tapioca. Light, refreshing, and comforting.		
+F	E			5	F-E-5	Shaved Ice 挫冰		A mountain of shaved ice topped with fruits, beans, or sweet syrup. It’s Taiwan’s ultimate summer treat to cool down in the heat.		
+F	E			6	F-E-6	Taiwanese Stir-Fry	熱炒	The Ultimate Night-Out Feast! A lively dining style where chefs whip up quick, flavorful dishes in blazing woks—perfect for sharing with friends over ice-cold Taiwan Beer. 		
+F	E			7	F-E-7	Fruit/Juice and Ice	水果	Taiwan is a tropical paradise where farmers use advanced cultivation techniques and microclimate advantages to grow an incredible variety of fruits—mangoes, pineapples, guavas, and more. You will never find them in any other countries.		
+F	E			7	F-E-7	Savory Congee	鹹粥	Savory congee is a rice porridge simmered with ingredients like dried shrimp, pork, or vegetables for a comforting, umami-rich flavor.		
+F	E			7	F-E-7	Plain congee with small side dishes	清粥小菜	This offers a lighter option—soft rice porridge paired with pickled vegetables, tofu, and peanuts, reflecting the rustic simplicity of Taiwanese home cooking.		
+F	C			1	F-C-1	Beef Noodle Soup	牛肉麵	All Taiwanese grow up with this! Inspired by Sichuan flavors, Taiwanese chefs added soy-braised beef and local spices for a milder, sweeter taste.		
+F	C			2	F-C-2	Braised Pork Rice	滷肉飯	All Taiwanese grow up with this! If you have not tried "melt-in-your-mouth tender", please try this. Pork belly is slow-braised with soy sauce, sugar, and spices for hours.		
+F	C			3	F-C-3	Oyster Omelette	蚵仔煎	A Fujianese dish transformed in Taiwan with sweet potato starch for extra chewiness. Experience the joy of Taiwan, a land blessed with rich ocean harvests and the rustic flavors of its countryside—where sweet potatoes and oysters have become true symbols of the island.		
+F	C			4	F-C-4	Gua Bao	割包	Origin of the global street-food star. It is traditional Hakka snack with fluffy steamed bun hugging braised pork belly, pickled veggies, and crushed peanuts		
+F	C			5	F-C-5	Popcorn Chicken	鹽酥雞	Find out the secret Taiwaneses deep fried the chicken. Bite-sized, crispy, and seasoned with basil. (Shh...We use sweet potato flour to coat the chicken and deep-fried twice)		
+F	C			6	F-C-6	Three-Cup Chicken	三杯雞	Named after its “three cups” of seasoning—soy sauce, rice wine, and sesame oil. We also use "Three cups" on other meat/vegetables,		
+F	C			7	F-C-7	Small and Big Sausage	大腸包小腸	A grilled Taiwanese pork sausage wrapped in sticky rice, a fun and flavorful street-food twist often found at these spots.		
+F	V			1	F-V-1	Stinky Tofu	臭豆腐	Crispy, funky, and with the Taiwanese Kimchi. The special smell is from the fermented process. Dare to try?		
+F	V			2	F-V-2	Scallion Pancake	蔥油餅	Flaky, crispy, and perfect with egg or cheese.		
+F	V			3	F-V-3	Sweet Potato Balls	地瓜球	You will never had this anywhere else! Made from mashed sweet potato mixed with tapioca starch for that bouncy texture.		
+F	V			4	F-V-4	Vegetarian Braised Pork Rice	素滷肉飯	Plant-based twist on a classic. Uses soy protein or mushrooms braised in soy sauce for a meaty texture.		
+F	V			5	F-V-5	Buddha’s Delight	羅漢齋	A Buddhist temple dish, cooked without onion or garlic due to Taiwanese Buddha limitation. A colorful mix of veggies and tofu.		
+F	V			6	F-V-6	Cold Noodles with Sesame Sauce	麻醬麵	Wheat noodles tossed in sesame paste, soy sauce, and vinegar. Perfect for humid summer in Taiwan.		
+F	V			6	F-V-6	Three-Cup Aubergine	三杯茄子	Named after its “three cups” of seasoning—soy sauce, rice wine, and sesame oil. We also use "Three cups" on other meat/vegetables.		
+F	M			1	F-M-1	Halal Beef Noodle	清真牛肉麵	Popular in Taipei’s Halal eateries, using beef shank and spice-rich broth. Certified shops serve this iconic dish.		
+F	M			2	F-M-2	Lamb Hot Pot	羊肉爐	Lamb simmered with Chinese herbs for hours, perfect for winter.		
+F	M			3	F-M-3					
+F	M			4	F-M-4					
+F	S			1	F-S-1	Grilled Squid	烤魷魚	Smoky, tender, brushed with sweet soy glaze.		
+F	S			2	F-S-2	Clam Soup	蛤蜊湯	A simple, homestyle dish with only fresh clams in a ginger-infused broth.		
+F	S			3	F-S-3	Milkfish	虱目魚	Taiwan’s thriving aquaculture industry makes milkfish a local staple, especially in Tainan. Its flesh is tender yet firm, with a mild sweetness and delicate texture.		
