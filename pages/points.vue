@@ -28,7 +28,7 @@
           >
             <div class="card-image-wrapper">
               <img 
-                :src="`/images/${point.Code}.jpg`" 
+                :src="`${baseURL}images/${point.Code}.jpg`" 
                 :alt="point.Name_EN" 
                 class="card-img"
                 @error="handleImageError"
@@ -59,7 +59,7 @@
         <div class="modal-content">
           <button class="close-btn" @click="selectedPoint = null">×</button>
           <img 
-            :src="`/images/${selectedPoint.Code}.jpg`" 
+            :src="`${baseURL}images/${selectedPoint.Code}.jpg`" 
             class="modal-img" 
             @error="handleImageError"
           >
@@ -79,6 +79,9 @@
 import { ref, computed, onMounted } from 'vue'
 import { wishes } from '~/assets/data/data.js'
 
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL
+
 // 1. 定義資料類型
 interface Point {
   Code: string;
@@ -86,7 +89,7 @@ interface Point {
   Name_CH?: string;
   City: string;
   Details: string;
-  Img_source: string;
+  Img_source?: string;
 }
 
 // 2. 狀態定義

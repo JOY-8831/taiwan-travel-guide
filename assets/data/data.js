@@ -159,7 +159,7 @@ export const tours = [
     id: "N-4",
     title: "Historical Trade Route",
     description: "Walk through commercial history, temples, and restored heritage streets.",
-    pointCodes: ["P-M-a-N-6", "P-C-b-N-8", "P-C-a-N-1", "P-C-b-N-6",],
+    pointCodes: ["P-M-a-N-6", "P-C-b-N-8", "P-C-a-N-1", "P-C-b-N-6"],
     coverImage: "P-C-a-N-1"
   },
   {

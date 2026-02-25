@@ -2,9 +2,9 @@
   <div id="tours-page" class="page-layout">
     <ButtonBack :dark="true" @click="goBack" />
 
-    <div class="tours-container">
-      <!-- Region Filter Bar moved OUTSIDE main frame for sticky stability -->
-      <div v-show="showRegionFilter" class="sticky-bar">
+    <!-- Region Filter Bar: Stable Sticky Container -->
+    <div v-show="showRegionFilter" class="sticky-bar-wrapper">
+      <div class="sticky-bar">
         <div class="region-filter-bar">
           <button 
             v-for="region in regions" 
@@ -17,6 +17,9 @@
           </button>
         </div>
       </div>
+    </div>
+
+    <div class="tours-container">
 
       <main class="frame">
         <div class="header-section">
@@ -25,7 +28,7 @@
           
           <div v-if="userStyles.length > 0" class="tag-container">
             <span v-for="style in userStyles" :key="style" class="style-tag">
-              # {{ styleLabels[style] || style }}
+              # {{ getStyleLabel(style) }}
             </span>
           </div>
         </div>
@@ -124,9 +127,9 @@
               <div class="spot-card" :style="{ borderColor: getEraColor(code) }">
                 <div class="spot-img-wrapper">
                   <img 
-                    :src="`/images/${code}.jpg`" 
+                    :src="getImgSrc(code)" 
                     class="spot-img"
-                    @error="handleImageError"
+                    @error="handleSpotImageError($event, code)"
                   >
                 </div>
                 <!-- 🎯 Added Spot Info Wrapper -->
@@ -170,6 +173,9 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL
 
 import { wishes, tours } from '../assets/data/data.js' 
 
@@ -316,11 +322,29 @@ const getStyleLabel = (style: string): string => {
   return labels[style] || style
 }
 
+const spotImageExtensions = ref<Record<string, string>>({})
+
+const getImgSrc = (code: string) => {
+  const ext = spotImageExtensions.value[code] || '.jpg'
+  return `${baseURL}images/${code}${ext}`
+}
+
+const handleSpotImageError = (event: Event, code: string) => {
+  const target = event.target as HTMLImageElement
+  const currentExt = spotImageExtensions.value[code] || '.jpg'
+  
+  if (currentExt === '.jpg') {
+    spotImageExtensions.value[code] = '.png'
+  } else if (currentExt === '.png') {
+    target.src = `${baseURL}images/fallback.jpg`
+    spotImageExtensions.value[code] = 'fallback'
+  }
+}
+
 const handleImageError = (event: Event) => {
-  // 這裡使用 as HTMLImageElement 告訴 TS 這是圖片元素
-  const target = event.target as HTMLImageElement;
+  const target = event.target as HTMLImageElement
   if (target) {
-    target.src = '/images/fallback.jpg'; // 🎯 Fix: Use specific fallback image requested
+    target.src = `${baseURL}images/fallback.jpg`;
   }
 };
 
@@ -356,61 +380,93 @@ const scrollToBottom = () => {
 </script>
 
 <style scoped>
-
+#tours-page.page-layout {
+  align-items: flex-start !important; 
+  padding-top: 60px;
+  padding-bottom: 120px;
+  height: auto !important;
+  min-height: 100vh;
+  background-color: #f9f7f2; /* 🎯 Original beige-ish background */
+}
 
 .tours-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* 🎯 Content centered like original */
   width: 100%;
 }
 
 .frame {
-  max-width: 900px;
+  max-width: 900px; 
+  margin: 0 auto;
   width: 100%;
-  padding: 0 20px;
-  position: relative;
+  position: relative; 
+}
+
+.header-section {
+  text-align: left; 
+  margin-bottom: 40px;
+  padding-left: 10px;
+}
+
+.title {
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 3rem;
+  color: var(--dark_blue);
+  margin-bottom: 10px;
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  color: #666;
 }
 
 .tag-container {
   display: flex;
-  justify-content: flex-start; /* Left aligned tags */
+  justify-content: flex-start;
   gap: 10px;
   margin-top: 15px;
 }
 
 .style-tag {
-  background: var(--pink);
-  color: white; /* Better contrast */
+  background: white;
+  color: var(--pink);
   padding: 4px 12px;
   border-radius: 20px;
-  font-size: 1.2rem;
+  font-size: 0.9rem;
   font-weight: bold;
+  border: 4px solid var(--pink); /* 🎯 Pink frame wrapping them */
 }
 
-/* Region Filter Bar */
+/* Region Filter Bar & Sticky Logic */
+.sticky-bar-wrapper {
+  position: -webkit-sticky; /* For Safari */
+  position: sticky; 
+  top: 0;
+  z-index: 2000;
+  background-color: #f9f7f2; 
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.sticky-bar {
+  padding: 15px 0 10px 0;
+  margin-bottom: 24px;
+  width: 100%;
+  max-width: 900px; 
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
+}
+
 .region-filter-bar {
   box-sizing: border-box;
   display: flex;
   flex-direction: row;
   align-items: center;
-  align-self: center; /* 🎯 Center within frame if needed */
   width: 100%;
   gap: 0;
-}
-
-.sticky-bar {
-  position: sticky;
-  top: 50px; /* 🎯 Stick below Back button */
-  z-index: 1000;
-  background-color: #f9f7f2;
-  padding: 10px 0;
-  margin-bottom: 24px;
-  width: 100%;
-  max-width: 900px; /* 🎯 Keep it matched to frame content width */
-
-  /* Masking shadow */
-  box-shadow: 0 10px 10px -10px rgba(0,0,0,0.05); 
 }
 
 .region-btn {
@@ -441,62 +497,35 @@ const scrollToBottom = () => {
   border-left: 2px solid #001D62;
 }
 
-.region-btn:hover {
-  background: #e8c4a8;
-}
-
 .region-btn.active {
   background: #001D62;
   color: #F3D5BA;
   font-weight: bold;
 }
 
-.bottom-switcher {
-  position: relative; /* Not sticky */
-  margin-top: 32px;
-  margin-bottom: 16px;
-  padding: 0; /* No extra padding for bottom one */
-}
-
 .tour-list {
   display: flex;
   flex-direction: column;
-  gap: 50px; /* Organize distinct tours */
+  gap: 50px; 
 }
 
-/* Increased gap from 10px to 5px */
+/* 🎯 Restored Original DASHED Styles from tours_old.vue */
 .tour-block {
   display: flex;
   flex-direction: column;
-  gap: 15px; 
-  padding: 24px;
-  background: white;
-  border-radius: 24px;
-  border: 4px solid var(--dark_blue);
-  box-shadow: 8px 8px 0px rgba(0,0,0,0.05);
-  margin-bottom: 30px;
-  transition: transform 0.2s ease;
+  gap: 5px; 
+  padding-bottom: 30px;
+  border-bottom: 2px dashed #ddd; /* Separator between tours */
 }
-
-.tour-block:hover {
-  transform: translateY(-4px);
-  box-shadow: 12px 12px 0px rgba(0,0,0,0.08);
-}
-
-.tour-block:nth-child(4n+1) { background-color: #fffaf0; border-color: var(--dark_blue); } 
-.tour-block:nth-child(4n+2) { background-color: #f0f8ff; border-color: var(--blue); } 
-.tour-block:nth-child(4n+3) { background-color: #f5f5f5; border-color: var(--pink); } 
-.tour-block:nth-child(4n+4) { background-color: #fffef9; border-color: var(--dark_blue); } 
 
 .tour-block:last-child {
-  margin-bottom: 0;
+  border-bottom: none;
 }
 
-/* Reduced gap from 15px to 8px, margin-bottom from 8px to 4px */
 .tour-header {
   display: flex;
   flex-wrap: wrap;
-  align-items: center; /* 🎯 Align heart center with title */
+  align-items: center; 
   gap: 8px;
   margin-bottom: 2px;
 }
@@ -504,7 +533,6 @@ const scrollToBottom = () => {
 .tour-title {
   font-family: 'Jersey 15', sans-serif;
   font-size: 2rem;
-  font-weight: normal; /* 🎯 Not bold per user request */
   color: var(--dark_blue);
   margin: 0;
 }
@@ -514,17 +542,17 @@ const scrollToBottom = () => {
   border: none;
   padding: 4px;
   cursor: pointer;
-  color: var(--dark_blue); /* Inherit color for outline */
+  color: var(--dark_blue); 
   transition: all 0.2s;
   line-height: 1;
 }
 
 .heart-btn .icon-outline rect {
-    fill: #ccc; /* Default grey for outline */
+    fill: #ccc; 
 }
 
 .heart-btn.active .icon-outline rect {
-    fill: var(--pink); /* Pink when active */
+    fill: var(--pink); 
 }
 
 .heart-btn.active {
@@ -532,32 +560,26 @@ const scrollToBottom = () => {
   transform: scale(1.1);
 }
 
-.heart-btn:hover {
-  transform: scale(1.2);
-}
-
 .tour-desc {
   color: #555;
-  line-height: 1.4;
-  font-size: 1.4rem; /* 🎯 Increased for readability */
-  max-width: 750px;
-  width: 100%; /* Break to new line */
-  margin-top: -2px; /* 🎯 Bring closer to header */
-  margin-bottom: 12px; /* 🎯 Closer to tour-flow */
+  line-height: 1.3;
+  font-size: 1.2rem;
+  max-width: 700px;
+  width: 100%; 
+  margin-top: -2px; 
+  margin-bottom: 8px; 
 }
 
-/* Horizontal Flow Container: Reduced padding-top to 0 to closer to desc */
 .tour-flow {
   display: flex;
   align-items: center;
   gap: 15px;
-  overflow-x: auto; /* Horizontal Scroll */
-  padding: 10px 10px 15px 10px; /* 🎯 Fix: Added top/bottom padding to prevent hover clipping */
-  scrollbar-width: thin; /* Firefox */
+  overflow-x: auto; 
+  padding: 10px 10px 15px 10px; 
+  scrollbar-width: thin; 
   scrollbar-color: var(--pink) transparent;
 }
 
-/* Custom Scrollbar */
 .tour-flow::-webkit-scrollbar {
   height: 8px;
 }
@@ -570,9 +592,9 @@ const scrollToBottom = () => {
 }
 
 .spot-card {
-  flex: 0 0 auto; /* Don't shrink */
-  width: 220px; /* 🎯 Increased width for better text flow */
-  height: 310px; /* 🎯 Increased height for more details */
+  flex: 0 0 auto; 
+  width: 200px; 
+  height: 280px; 
   display: flex;
   flex-direction: column;
   gap: 8px;
@@ -581,20 +603,15 @@ const scrollToBottom = () => {
   border-radius: 12px;
   border: 2px solid var(--dark_blue);
   box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
-  transition: transform 0.2s;
-}
-
-.spot-card:hover {
-  transform: translateY(-2px);
 }
 
 .spot-img-wrapper {
   width: 100%;
-  height: 120px; /* Slightly taller */
+  height: 120px; 
   border-radius: 8px;
   overflow: hidden;
   background: #eee;
-  flex-shrink: 0; /* Prevent image shrinking */
+  flex-shrink: 0;
 }
 
 .spot-img {
@@ -607,14 +624,14 @@ const scrollToBottom = () => {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  flex: 1; /* Fill remaining space */
+  flex: 1; 
 }
 
 .spot-name {
-  font-size: 1.4rem; /* 🎯 Increased as requested (Just English) */
-  font-weight: normal; /* 🎯 Not bold per user request */
+  font-size: 1.1rem; 
+  font-weight: bold;
   color: #333;
-  line-height: 1.2;
+  line-height: 1.3;
   display: flex;
   flex-direction: column;
   text-align: left;
@@ -622,15 +639,14 @@ const scrollToBottom = () => {
 }
 
 .ch-name {
-  font-size: 0.95rem; /* Slightly larger */
+  font-size: 0.9rem;
   font-weight: normal;
   color: #666;
 }
 
 .spot-details {
-  font-size: 1rem; /* 🎯 Increased as requested */
-  color: #555;
-  /* Truncate to 4 lines */
+  font-size: 0.85rem;
+  color: #666;
   display: -webkit-box;
   -webkit-line-clamp: 4;
   line-clamp: 4;
@@ -642,24 +658,9 @@ const scrollToBottom = () => {
 
 .flow-arrow {
   flex: 0 0 auto;
-  color: var(--vanilla); /* Match About Taiwan arrow color */
+  color: #ddd; 
   font-size: 1.5rem;
   font-weight: bold;
-}
-
-.bottom-controls {
-  display: flex;
-  justify-content: center;
-  margin-top: 40px;
-  width: 100%;
-}
-
-.control-group {
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  flex-wrap: wrap;
-  justify-content: center;
 }
 
 .next-section {
@@ -697,17 +698,5 @@ const scrollToBottom = () => {
 .scroll-btn:hover {
   transform: translateY(-3px);
   background: var(--pink);
-}
-
-.retry-btn {
-  margin-top: 20px;
-  padding: 10px 20px;
-  background: var(--dark_blue);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  cursor: pointer;
-  font-family: 'Jersey 15', sans-serif;
-  font-size: 1.2rem;
 }
 </style>

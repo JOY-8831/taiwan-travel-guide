@@ -18,11 +18,7 @@
         </div>
         
         <div class="guide-footer">
-          <ButtonOk 
-            text="Got it!" 
-            type="ok" 
-            @click="nextStep"
-          />
+          <button class="custom-got-it" @click="nextStep">Got it!</button>
         </div>
         
         <!-- Arrow pointing to target -->
@@ -95,24 +91,32 @@ watch(currentIndex, () => {
 })
 
 const overlayStyle = computed(() => {
-  if (!targetRect.value) return { background: 'rgba(0,0,0,0.7)' }
+  if (!targetRect.value) return { backgroundColor: 'rgba(0,0,0,0.7)' }
   
   const { top, left, width, height } = targetRect.value
-  const padding = 5
+  const centerX = left + width/2
+  const centerY = top + height/2
+  const radius = Math.max(width, height) / 1.5
+  
   return {
     backgroundColor: 'transparent',
-    backgroundImage: `radial-gradient(circle at ${left + width/2}px ${top + height/2}px, transparent ${Math.max(width, height)/1.5}px, rgba(0,0,0,0.7) ${Math.max(width, height)/1.5 + 5}px)`
+    backgroundImage: `radial-gradient(circle at ${centerX}px ${centerY}px, transparent ${radius}px, rgba(0,0,0,0.7) ${radius + 5}px)`
   }
 })
 
 const boxStyle = computed(() => {
-  if (!targetRect.value) return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }
+  if (!targetRect.value) {
+    return {
+      top: '50%',
+      left: '50%',
+      transform: 'translate(-50%, -50%)',
+      position: 'fixed' as const
+    }
+  }
   
   const { top, left, width, height } = targetRect.value
   const step = props.steps?.[currentIndex.value]
-  if (!step) return { top: '50%', left: '50%', transform: 'translate(-50%, -50%)' }
-  
-  const pos = step.position || 'bottom'
+  const pos = step?.position || 'bottom'
   
   let bTop = 0
   let bLeft = left + width/2
@@ -120,10 +124,10 @@ const boxStyle = computed(() => {
   if (pos === 'bottom') {
     bTop = top + height + 20
   } else if (pos === 'top') {
-    bTop = top - 150 - 20 // Approx height of box
+    bTop = top - 180 // Approx height
   }
   
-  // Basic bounds checking
+  // Bounds checking
   bLeft = Math.max(20, Math.min(window.innerWidth - 340, bLeft - 160))
 
   return {
@@ -136,12 +140,13 @@ const boxStyle = computed(() => {
 const arrowClass = computed(() => props.steps[currentIndex.value]?.position || 'bottom')
 
 const arrowStyle = computed(() => {
-  if (!targetRect.value || !boxRef.value) return {}
+  if (!targetRect.value || !boxRef.value) return { display: 'none' }
   const { left, width } = targetRect.value
-  const boxLeft = parseInt(boxStyle.value.left)
-  const offset = (left + width/2) - boxLeft
+  const bLeft = parseInt(boxStyle.value.left || '0')
+  const offset = (left + width/2) - bLeft
   return {
-    left: `${offset}px`
+    left: `${offset}px`,
+    display: 'block'
   }
 })
 </script>
@@ -169,8 +174,8 @@ const arrowStyle = computed(() => {
 .guide-box {
   background: var(--vanilla);
   border: 4px solid var(--dark_blue);
-  width: 320px;
-  padding: 20px;
+  width: 260px;
+  padding: 16px;
   display: flex;
   flex-direction: column;
   gap: 15px;
@@ -184,13 +189,29 @@ const arrowStyle = computed(() => {
   font-size: 1.3rem;
   color: var(--dark_blue);
   line-height: 1.3;
-  text-align: center;
+  text-align: left;
   margin: 0;
 }
 
 .guide-footer {
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
+}
+
+.custom-got-it {
+  background: var(--dark_blue);
+  color: var(--vanilla);
+  border: 4px solid var(--dark_blue);
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 1.1rem;
+  padding: 4px 16px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.custom-got-it:hover {
+  background: var(--pink);
+  color: white;
 }
 
 .guide-arrow {

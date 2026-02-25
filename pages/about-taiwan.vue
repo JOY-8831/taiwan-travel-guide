@@ -28,7 +28,7 @@
             
             <!-- Era image (Permanently visible and larger) -->
              <div class="era-image-wrapper">
-                <img :src="era.image || '/images/fallback.jpg'" alt="Era Preview" />
+                <img :src="era.image ? `${baseURL}${era.image.startsWith('/') ? era.image.substring(1) : era.image}` : `${baseURL}images/fallback.jpg`" alt="Era Preview" />
              </div>
           </div>
         </div>
@@ -80,6 +80,9 @@ const historyEras = [
 ];
 
 // No need for global hover state anymore
+
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL
 </script>
 
 <style scoped>

@@ -4,12 +4,11 @@ export default defineNuxtConfig({
   ssr: true,
   devtools: { enabled: true },
   app: {
-    baseURL: '/taiwan-travel-guide/',
-    buildAssetsDir: 'assets', // Optional: simpler directory structure
+    baseURL: process.env.NODE_ENV === 'production' ? '/nuxt-app/' : '/',
   },
 
   css: [
-    '~/assets/css/main.css',
+    '@/assets/css/main.css',
   ],
 
   modules: [

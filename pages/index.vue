@@ -3,7 +3,7 @@
     
     <div class="video-background">
       <video autoplay muted loop playsinline>
-        <source src="/images/start_video.mp4" type="video/mp4">
+        <source :src="`${baseURL}images/start_video.mp4`" type="video/mp4">
       </video>
     </div>
 
@@ -23,6 +23,8 @@
 // const router = useRouter() 和 useHead() 會被自動導入
 
 const router = useRouter()
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL
 
 const enterGame = () => {
   // 使用 router.push 導航

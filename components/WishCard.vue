@@ -217,6 +217,9 @@
 import { ref, computed } from 'vue'
 import { useFavorites } from '~/composables/useFavorites'
 
+const config = useRuntimeConfig()
+const baseURL = config.app.baseURL
+
 const props = withDefaults(defineProps<{
     item: {
         Code: string;
@@ -234,14 +237,14 @@ const props = withDefaults(defineProps<{
 const { isFavorite, toggleFavorite } = useFavorites()
 
 // --- 圖片載入狀態與邏輯 ---
-const defaultImage = ref('/images/fallback.jpg')
+const defaultImage = ref(`${baseURL}images/fallback.jpg`)
 // 追蹤當前嘗試的副檔名，初始為 .jpg
 const currentImageExt = ref('.jpg')
 // 🎯 根據 item.Code 和當前副檔名計算圖片路徑
 const imageSrc = computed(() => {
     const code = props.item.Code;
     // 第一次總是嘗試 currentImageExt (預設是 .jpg)
-    const path = `/images/${code}${currentImageExt.value}`;
+    const path = `${baseURL}images/${code}${currentImageExt.value}`;
     // console.log(`[WishCard DEBUG] Generated Image Path: ${path}`);
     return path;
 })
