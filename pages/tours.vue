@@ -381,12 +381,11 @@ const scrollToBottom = () => {
 
 <style scoped>
 #tours-page.page-layout {
-  align-items: flex-start !important; 
+  display: block; /* 🎯 More predictable for vertical sticky */
   padding-top: 60px;
   padding-bottom: 120px;
-  height: auto !important;
   min-height: 100vh;
-  background-color: #f9f7f2; /* 🎯 Original beige-ish background */
+  background-color: #f9f7f2; 
 }
 
 .tours-container {
