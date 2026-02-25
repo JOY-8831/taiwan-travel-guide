@@ -4,7 +4,7 @@ export default defineNuxtConfig({
   ssr: true,
   devtools: { enabled: true },
   app: {
-    baseURL: '/nuxt-app/',
+    baseURL: '/taiwan-travel-guide/',
     buildAssetsDir: 'assets', // Optional: simpler directory structure
   },
 
