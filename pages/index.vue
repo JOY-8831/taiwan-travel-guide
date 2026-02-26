@@ -78,6 +78,17 @@ useHead({
   object-fit: cover;
 }
 
+.video-background::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4); /* 調整遮罩深淺：0.4 表示 40% 黑色 */
+  z-index: 0;
+}
+
 .build-your-taiwan { 
   margin: 0;
   -webkit-text-fill-color: transparent;

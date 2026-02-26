@@ -18,7 +18,7 @@
       />
 
       <OptionSingle 
-          text="> About us" @select="navigateTo('/about-us')"
+          text="> About us and references" @select="navigateTo('/about-us-ref')"
       />
 
     </main>

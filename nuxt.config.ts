@@ -5,6 +5,7 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   app: {
     baseURL: process.env.NODE_ENV === 'production' ? '/taiwan-travel-guide/' : '/',
+    //baseURL: process.env.NODE_ENV === 'production' ? '/nuxt-app/' : '/',
   },
 
   css: [

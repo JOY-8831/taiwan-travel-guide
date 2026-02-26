@@ -47,6 +47,8 @@ body {
   /* 🎯 Start from top */
 
   /* 🎯 背景通用設定 */
+  background-color: var(--vanilla);
+  /* 🎯 Fallback color while image is loading */
   background-size: cover;
   background-repeat: no-repeat;
   background-position: center;
@@ -81,33 +83,26 @@ body {
 }
 
 /* ========= 列表頁面：可滾動且從頂部開始 =========== */
+#must_see.page-layout,
 #must_eat.page-layout,
+#travel-style.page-layout,
 #diet.page-layout,
 #meat.page-layout,
 #veggie.page-layout,
 #seafood.page-layout,
 #halalfood.page-layout,
-#must_see.page-layout,
 #points.page-layout {
   min-height: 100vh;
-  /* 允許內容撐大頁面並滾動 */
-
-  /* 🎯 關鍵修正：讓內容從容器的頂部開始排列 */
   align-items: flex-start;
-
-  /* 🎯 增加頂部和底部的邊距，防止內容緊貼視窗邊緣 */
   padding-top: 80px;
-  /* 🎯 Increased to clear fixed back button */
   padding-bottom: 40px;
-
-  background-image: url('~/assets/images/city.png');
 }
 
-#travel-style.page-layout {
-  min-height: 100vh;
-  align-items: flex-start;
-  padding-top: 80px;
-  padding-bottom: 40px;
+#must_see {
+  background-image: linear-gradient(rgba(0, 0, 0, 0.4), rgba(0, 0, 0, 0.4)), url('~/assets/images/city.png') !important;
+}
+
+#travel-style {
   background-image: url('~/assets/images/nature.png');
 }
 

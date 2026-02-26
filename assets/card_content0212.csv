@@ -1,31 +1,47 @@
-Step	Category	Sub_category	Region	Number	Code	Name_EN	Name_CH	details	Source	Special
-F	E			1	F-E-1	Traditional Breakfast 傳統早餐		A classic Taiwanese breakfast usually includes warm soy milk (豆漿) paired with crispy baked flatbread (燒餅) or a chewy egg crepe (蛋餅). It’s simple, comforting, and a must-try way to start the day like a local.		
-F	E			2	F-E-2	Bubble Milk Tea 珍珠奶茶		Most famous drink in Taiwan with milk tea and chewy tapioca pearls. Sweet, fun, and customizable, it’s a global icon that started on the island.”		
-F	E			3	F-E-3	Stinky Tofu 臭豆腐		Taiwan’s most iconic street food — it smells bold but tastes surprisingly delicious, crispy outside and tender inside. Dare to try it, and you might just get hooked!		
-F	E			4	F-E-4	Tofu Pudding 豆花		Douhua is a silky tofu pudding served with sweet syrup and toppings like peanuts or tapioca. Light, refreshing, and comforting.		
-F	E			5	F-E-5	Shaved Ice 挫冰		A mountain of shaved ice topped with fruits, beans, or sweet syrup. It’s Taiwan’s ultimate summer treat to cool down in the heat.		
-F	E			6	F-E-6	Taiwanese Stir-Fry	熱炒	The Ultimate Night-Out Feast! A lively dining style where chefs whip up quick, flavorful dishes in blazing woks—perfect for sharing with friends over ice-cold Taiwan Beer. 		
-F	E			7	F-E-7	Fruit/Juice and Ice	水果	Taiwan is a tropical paradise where farmers use advanced cultivation techniques and microclimate advantages to grow an incredible variety of fruits—mangoes, pineapples, guavas, and more. You will never find them in any other countries.		
-F	E			7	F-E-7	Savory Congee	鹹粥	Savory congee is a rice porridge simmered with ingredients like dried shrimp, pork, or vegetables for a comforting, umami-rich flavor.		
-F	E			7	F-E-7	Plain congee with small side dishes	清粥小菜	This offers a lighter option—soft rice porridge paired with pickled vegetables, tofu, and peanuts, reflecting the rustic simplicity of Taiwanese home cooking.		
-F	C			1	F-C-1	Beef Noodle Soup	牛肉麵	All Taiwanese grow up with this! Inspired by Sichuan flavors, Taiwanese chefs added soy-braised beef and local spices for a milder, sweeter taste.		
-F	C			2	F-C-2	Braised Pork Rice	滷肉飯	All Taiwanese grow up with this! If you have not tried "melt-in-your-mouth tender", please try this. Pork belly is slow-braised with soy sauce, sugar, and spices for hours.		
-F	C			3	F-C-3	Oyster Omelette	蚵仔煎	A Fujianese dish transformed in Taiwan with sweet potato starch for extra chewiness. Experience the joy of Taiwan, a land blessed with rich ocean harvests and the rustic flavors of its countryside—where sweet potatoes and oysters have become true symbols of the island.		
-F	C			4	F-C-4	Gua Bao	割包	Origin of the global street-food star. It is traditional Hakka snack with fluffy steamed bun hugging braised pork belly, pickled veggies, and crushed peanuts		
-F	C			5	F-C-5	Popcorn Chicken	鹽酥雞	Find out the secret Taiwaneses deep fried the chicken. Bite-sized, crispy, and seasoned with basil. (Shh...We use sweet potato flour to coat the chicken and deep-fried twice)		
-F	C			6	F-C-6	Three-Cup Chicken	三杯雞	Named after its “three cups” of seasoning—soy sauce, rice wine, and sesame oil. We also use "Three cups" on other meat/vegetables,		
-F	C			7	F-C-7	Small and Big Sausage	大腸包小腸	A grilled Taiwanese pork sausage wrapped in sticky rice, a fun and flavorful street-food twist often found at these spots.		
-F	V			1	F-V-1	Stinky Tofu	臭豆腐	Crispy, funky, and with the Taiwanese Kimchi. The special smell is from the fermented process. Dare to try?		
-F	V			2	F-V-2	Scallion Pancake	蔥油餅	Flaky, crispy, and perfect with egg or cheese.		
-F	V			3	F-V-3	Sweet Potato Balls	地瓜球	You will never had this anywhere else! Made from mashed sweet potato mixed with tapioca starch for that bouncy texture.		
-F	V			4	F-V-4	Vegetarian Braised Pork Rice	素滷肉飯	Plant-based twist on a classic. Uses soy protein or mushrooms braised in soy sauce for a meaty texture.		
-F	V			5	F-V-5	Buddha’s Delight	羅漢齋	A Buddhist temple dish, cooked without onion or garlic due to Taiwanese Buddha limitation. A colorful mix of veggies and tofu.		
-F	V			6	F-V-6	Cold Noodles with Sesame Sauce	麻醬麵	Wheat noodles tossed in sesame paste, soy sauce, and vinegar. Perfect for humid summer in Taiwan.		
-F	V			6	F-V-6	Three-Cup Aubergine	三杯茄子	Named after its “three cups” of seasoning—soy sauce, rice wine, and sesame oil. We also use "Three cups" on other meat/vegetables.		
-F	M			1	F-M-1	Halal Beef Noodle	清真牛肉麵	Popular in Taipei’s Halal eateries, using beef shank and spice-rich broth. Certified shops serve this iconic dish.		
-F	M			2	F-M-2	Lamb Hot Pot	羊肉爐	Lamb simmered with Chinese herbs for hours, perfect for winter.		
-F	M			3	F-M-3					
-F	M			4	F-M-4					
-F	S			1	F-S-1	Grilled Squid	烤魷魚	Smoky, tender, brushed with sweet soy glaze.		
-F	S			2	F-S-2	Clam Soup	蛤蜊湯	A simple, homestyle dish with only fresh clams in a ginger-infused broth.		
-F	S			3	F-S-3	Milkfish	虱目魚	Taiwan’s thriving aquaculture industry makes milkfish a local staple, especially in Tainan. Its flesh is tender yet firm, with a mild sweetness and delicate texture.		
+Period	國家圖書館(NCL-Taiwan)	https://tme.ncl.edu.tw/tw/%E8%87%BA%E7%81%A3%E8%80%81%E7%85%A7%E7%89%87%E5%9C%96%E9%9B%86/%E5%BD%B1%E9%A5%97/%E5%BA%B6%E6%B0%91%E7%94%9F%E6%B4%BB/2790-%E6%B3%B0%E9%9B%85%E6%97%8F%E5%A9%A6%E5%A5%B3
+	國立臺灣歷史博物館	https://collections.nmth.gov.tw/CollectionContent.aspx?a=132&rno=2002.006.0008
+	自由時報	https://news.ltn.com.tw/news/world/breakingnews/3407721
+Spot	平溪老街	朋友: 劉青雲
+	北投圖書館	朋友: 楊凱恩
+	野柳	https://newtaipei.travel/en/attractions/detail/111495
+	Baimiweng Fort	https://klgreat.klcg.gov.tw/en/History_Content.aspx?n=8166&s=8889
+	Xian Dong Yan (Fairy Cave)	https://travel.klcg.gov.tw/en/TourContent.aspx?n=8508&s=740
+	Jiufen Old Street	https://www.travel.taipei/en/attraction/details/642
+	beitou library	
+	溫泉博物館	https://www.travel.taipei/en/attraction/details/454
+	圓山市集	https://www.travel.taipei/en/news/details/17021
+	故宮	https://www.travel.taipei/en/attraction/details/441
+	北美	https://www.tfam.museum/Common/editor.aspx?id=78&ddlLang=en-us
+	士林夜市	https://www.travel.taipei/en/attraction/details/1692
+	行天宮	
+	中山區	https://taiwanderers.com/zhongshan-taipei-things-to-do/
+	大稻埕	https://www.travel.taipei/en/attraction/details/1686
+	中正紀念堂	https://www.travel.taipei/zh-tw/attraction/details/23
+	國立台灣博物館	https://www.ntm.gov.tw/
+	總統府	https://english.president.gov.tw/Page/45
+	西門町	https://www.foreignersintaiwan.com/blog/ximending
+	Longshan Temple	https://www.travel.taipei/en/attraction/details/487
+	青草巷	網友
+	剝皮寮	https://www.bopiliao.taipei/en
+	台北101	
+	國父紀念館	https://museums.moc.gov.tw/EN/MusData/Detail?museumsId=01cb6413-a591-4613-802b-5e3d898250cd
+	永康街	https://www.travel.taipei/en/media/audio-guide/details/231
+	貓空	
+	包種茶	https://www.travel.taipei/zh-tw/attraction/details/245
+	樟樹步道	https://www.travel.taipei/en/pictorial/article/18243
+	烏石港	https://www.necoast-nsa.gov.tw/Attraction-Content.aspx?a=278&l=2
+	五峰旗瀑布	https://taiwantrailsandtales.com/2023/09/13/wufengqi-waterfalls-and-our-lady-of-wufengqi-church/
+	礁溪溫泉	https://jiaoxi-tourism.tw/index.php/en/attraction/all-in-one-map-2/item/1324-view06
+	赤崁樓	https://www.twtainan.net/en/attractions/detail/5849
+	四草隧道	https://www.swcoast-nsa.gov.tw/en/attraction/details/506
+	藍晒圖	https://www.twtainan.net/en/attractions/detail/4442
+	蓮池潭	https://khh.travel/en/attractions/detail/491/
+	橋頭糖廠	https://www.taisugar.com.tw/english/Attractions_detail.aspx?n=11997&s=327&p=318
+	安平樹屋	https://www.twtainan.net/en/attractions/detail/4486
+	活水湖	https://tour.taitung.gov.tw/en/attraction/details/707
+	天后宮	https://tour.taitung.gov.tw/en/attraction/details/585
+	原生植物園	https://ttyuansen.com/%E6%B1%86%E7%87%99%E9%8D%8B
+	鐵花村 鐵道	https://tour.taitung.gov.tw/en/attraction/details/1411
+Food	巧兒灶咖	https://ciao.kitchen/gua-bao/
+	果果愛	https://fruitlovelife.com/post-f1131201/
+	牛肉麵	https://auntie.tw/chang-beef-noodles/
