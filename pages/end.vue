@@ -20,6 +20,11 @@
           allowfullscreen
         ></iframe>
       </div>
+      
+      <section class="social-links">
+        <p>📸 Follow Joy's "Sketch Journeys" on IG <a href="https://www.instagram.com/joyishere.meetup" target="_blank">@joyishere.meetup</a> and <a href="https://halfgeographer.wordpress.com/" target="_blank">website</a></p>
+        <p>🎨 Find more designs by Kathleen on <a href="https://kathleen-design.framer.website/" target="_blank">kathleen-design.framer.website</a></p>
+      </section>
 
       <div class="button-container">
         <ButtonNext
@@ -60,4 +65,21 @@ const router = useRouter()
 }
 
 
+.social-links {
+  text-align: center;
+  margin: 20px auto;
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 1.2rem;
+  color: var(--dark_blue);
+  line-height: 1.6;
+}
+
+.social-links a {
+  color: var(--pink);
+  text-decoration: underline;
+}
+
+.social-links a:hover {
+  color: var(--blue);
+}
 </style>
