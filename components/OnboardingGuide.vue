@@ -32,7 +32,7 @@
 import { ref, computed, onMounted, onUnmounted, nextTick, watch } from 'vue'
 
 const props = defineProps<{
-  steps: { text: string; target: string; position?: 'top' | 'bottom' | 'left' | 'right' }[]
+  steps: { text: string; target: string; position?: 'top' | 'bottom' | 'left' | 'right' | 'center' }[]
 }>()
 
 const emit = defineEmits<{
@@ -105,7 +105,10 @@ const overlayStyle = computed(() => {
 })
 
 const boxStyle = computed(() => {
-  if (!targetRect.value) {
+  const step = props.steps?.[currentIndex.value]
+  const pos = step?.position || 'bottom'
+
+  if (!targetRect.value || pos === 'center') {
     return {
       top: '50%',
       left: '50%',
@@ -115,24 +118,38 @@ const boxStyle = computed(() => {
   }
   
   const { top, left, width, height } = targetRect.value
-  const step = props.steps?.[currentIndex.value]
-  const pos = step?.position || 'bottom'
   
   let bTop = 0
-  let bLeft = left + width/2
+  let bLeft = 0
+  let transform = ''
   
   if (pos === 'bottom') {
     bTop = top + height + 20
+    bLeft = left + width/2
+    transform = 'translateX(-50%)'
   } else if (pos === 'top') {
-    bTop = top - 180 // Approx height
+    bTop = top - 180 // Simple estimate, can be refined
+    bLeft = left + width/2
+    transform = 'translateX(-50%)'
+  } else if (pos === 'right') {
+    bTop = top + height/2
+    bLeft = left + width + 20
+    transform = 'translateY(-50%)'
+  } else if (pos === 'left') {
+    bTop = top + height/2
+    bLeft = left - 280
+    transform = 'translateY(-50%)'
   }
   
-  // Bounds checking
-  bLeft = Math.max(20, Math.min(window.innerWidth - 340, bLeft - 160))
+  // Basic bounds checking for left/right
+  if (pos === 'top' || pos === 'bottom') {
+    bLeft = Math.max(140, Math.min(window.innerWidth - 140, bLeft))
+  }
 
   return {
     top: `${bTop}px`,
     left: `${bLeft}px`,
+    transform,
     position: 'fixed' as const
   }
 })
@@ -140,14 +157,35 @@ const boxStyle = computed(() => {
 const arrowClass = computed(() => props.steps[currentIndex.value]?.position || 'bottom')
 
 const arrowStyle = computed(() => {
-  if (!targetRect.value || !boxRef.value) return { display: 'none' }
-  const { left, width } = targetRect.value
-  const bLeft = parseInt(boxStyle.value.left || '0')
-  const offset = (left + width/2) - bLeft
-  return {
-    left: `${offset}px`,
-    display: 'block'
+  const pos = props.steps[currentIndex.value]?.position || 'bottom'
+  if (!targetRect.value || !boxRef.value || pos === 'center') return { display: 'none' }
+  
+  const { top, left, width, height } = targetRect.value
+  
+  if (pos === 'top' || pos === 'bottom') {
+    const bLeft = parseInt(boxStyle.value.left || '0')
+    const offset = (left + width/2) - bLeft
+    return {
+      left: `calc(50% + ${offset}px)`, // Adjust based on transition
+      display: 'block'
+    }
+  } else if (pos === 'right') {
+    return {
+      left: '-14px',
+      top: '50%',
+      transform: 'translateY(-50%) rotate(90deg)',
+      display: 'block'
+    }
+  } else if (pos === 'left') {
+    return {
+      right: '-14px',
+      top: '50%',
+      transform: 'translateY(-50%) rotate(-90deg)',
+      display: 'block'
+    }
   }
+  
+  return { display: 'none' }
 })
 </script>
 

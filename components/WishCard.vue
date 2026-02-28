@@ -385,11 +385,11 @@ const structuredDetails = computed(() => {
 
 .card-topic {
     font-family: 'Jersey 15', sans-serif;
-    font-size: 1.5rem; /* 🎯 Reduced to avoid heart button collision */
+    font-size: 1.5rem; /* 🎯 Adjusted to 1.5rem per user request */
     font-weight: normal; /* 🎯 Not bold per user request */
     color: var(--vanilla);
     margin: 0 0 10px 0; /* 🎯 Added bottom margin for spacing to image */
-    line-height: 1.1;
+    line-height: 1;
     text-align: left; /* 🎯 Left aligned per user request */
     display: flex;
     flex-direction: column;
@@ -411,11 +411,11 @@ const structuredDetails = computed(() => {
 
 .modal-title {
     font-family: 'Jersey 15', sans-serif;
-    font-size: 2.5rem;
+    font-size: 1.5rem; /* 🎯 Adjusted to 1.5rem per user request */
     font-weight: normal; /* 🎯 Not bold per user request */
     color: var(--dark_blue);
     margin: 0;
-    line-height: 1.1;
+    line-height: 1;
     text-align: left; /* 🎯 Left aligned per user request */
     display: flex;
     flex-direction: column;
@@ -585,6 +585,7 @@ const structuredDetails = computed(() => {
     letter-spacing: 0.02em;
     color: var(--dark_blue);
     padding-right: 5px; /* 防止滾動條擋住文字 */
+    line-height: 1; /* 🎯 Set to 1 per user request */
 }
 
 .modal-description p {
@@ -608,7 +609,7 @@ const structuredDetails = computed(() => {
 
 .modal-description li {
     margin-bottom: 5px; 
-    line-height: 1.4;
+    line-height: 1;
     color: var(--dark_blue); /* 確保文字顏色正確 */
 }
 </style>

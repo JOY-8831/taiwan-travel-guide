@@ -97,40 +97,42 @@ const baseURL = config.app.baseURL
 
 
 .timeline-container {
-  padding: 20px 10px;
+  padding: 20px 6px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
 }
 
 .timeline-item {
   display: flex;
-  gap: 20px;
-  margin-bottom: 30px; /* Increased margin for larger cards */
+  flex-direction: column;
+  width: 100%;
+  margin-bottom: 20px;
 }
 
-/* 左側樣式 */
+/* 左側樣式 (現在是頂部時間) */
 .timeline-left {
-  width: 120px;
+  width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-end; /* 時間靠右對齊中心線 */
+  align-items: center;
   flex-shrink: 0;
+  margin-bottom: 10px;
 }
 
 .era-time {
   font-family: "Jersey 15", sans-serif;
-  font-size: 1.4rem; /* 字體加大 */
-  color: var(--pink); /* 改成粉橘色 (Pink) */
-  text-align: right;
+  font-size: 1.6rem;
+  color: var(--vanilla);
+  text-align: center;
   line-height: 1.2;
-  margin-top: 15px; /* 對齊右邊框框的頂部 */
 }
 
 .timeline-line {
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 20px;
-  margin-right: -10px; /* 讓線條靠近內容 */
-  flex-grow: 1;
+  width: 100%;
   margin-top: 5px;
 }
 
@@ -139,71 +141,47 @@ const baseURL = config.app.baseURL
   height: 14px;
   background: var(--pink);
   border: 2px solid var(--dark_blue);
-  margin: 5px 0;
-  border-radius: 50%; /* 圓點 */
+  border-radius: 50%;
 }
 
 .arrow-down {
-  color: var(--vanilla); /* Vanilla */
-  font-size: 12px;
-  flex-grow: 1;
-  display: flex;
-  align-items: center;
-  /* 畫出一條垂直虛線 */
-  border-left: 2px dashed var(--vanilla); /* Vanilla */
-  margin-left: 6px; /* 微調對齊圓點中心 */
-  padding-bottom: 20px;
+  display: none; /* Hide arrow in new vertical flow */
 }
 
-/* 右側樣式 */
+/* 右側樣式 (主要內容區塊) */
 .timeline-right {
-  flex: 1;
-  background: white;
+  width: 100%;
+  background: var(--vanilla);
   border: 2px solid var(--dark_blue);
   padding: 20px;
   box-shadow: 6px 6px 0px var(--dark_blue);
   position: relative;
-  transition: transform 0.2s ease, box-shadow 0.2s ease; /* 加入過渡效果 */
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
   display: flex;
   flex-direction: column;
   gap: 15px;
-}
-
-/* Hover 效果：滑鼠移入時放大 */
-.timeline-item:hover .timeline-right {
-  transform: scale(1.02);
-  box-shadow: 8px 8px 0px var(--dark_blue);
-  z-index: 10;
+  color: var(--dark_blue);
 }
 
 .era-title {
   margin: 0;
-  font-size: 1.5rem; /* Increased title size */
+  font-size: 1.5rem;
   color: var(--dark_blue);
+  text-align: center;
 }
 
 .era-desc {
   margin: 0;
-  font-size: 1.2rem; /* 加大內文字體 */
-  line-height: 1.4;
-  color: #333;
+  font-size: 1.2rem;
+  line-height: 1;
+  color: var(--dark_blue);
+  text-align: center;
 }
 
-/* 裝飾：讓標題看起來更像一個對話框或卡片 */
-.timeline-right::before {
-  content: '';
-  position: absolute;
-  left: -10px;
-  top: 20px;
-  border-top: 10px solid transparent;
-  border-bottom: 10px solid transparent;
-  border-right: 12px solid var(--dark_blue);
-}
-
-/* Era image wrapper (Permanent) */
+/* Era image wrapper (Consistent width and height) */
 .era-image-wrapper {
   width: 100%;
-  height: 250px; /* Large fixed height */
+  height: 250px;
   border-radius: 8px;
   overflow: hidden;
   border: 3px solid var(--dark_blue);
@@ -217,4 +195,34 @@ const baseURL = config.app.baseURL
   display: block;
 }
 
+@media (max-width: 600px) {
+  #about_taiwan.page-layout {
+    padding-top: 40px;
+  }
+
+  .timeline-container {
+    padding: 10px 6px;
+  }
+
+  .era-time {
+    font-size: 1.4rem;
+  }
+
+  .timeline-right {
+    padding: 15px;
+    box-shadow: 4px 4px 0px var(--dark_blue);
+  }
+
+  .era-title {
+    font-size: 1.3rem;
+  }
+
+  .era-desc {
+    font-size: 1.1rem;
+  }
+
+  .era-image-wrapper {
+    height: 200px;
+  }
+}
 </style>

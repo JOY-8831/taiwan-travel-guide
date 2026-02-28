@@ -53,6 +53,18 @@ const foodReferences = [
   { name: 'Chang Beef Noodles (牛肉麵)', url: 'https://auntie.tw/chang-beef-noodles/' }
 ]
 
+const openSections = ref<string[]>([])
+
+const toggleSection = (sectionId: string) => {
+  if (openSections.value.includes(sectionId)) {
+    openSections.value = openSections.value.filter(id => id !== sectionId)
+  } else {
+    openSections.value.push(sectionId)
+  }
+}
+
+const isSectionOpen = (sectionId: string) => openSections.value.includes(sectionId)
+
 const goBack = () => {
   router.push('/menu')
 }
@@ -73,38 +85,53 @@ const goBack = () => {
         <!-- References Section -->
         <div class="reference-content">
           <section class="ref-section">
-            <h2 class="section-title">Historical & Archival</h2>
-            <ul class="ref-list">
-              <li v-for="source in historicalSources" :key="source.name">
-                <span class="source-name">{{ source.name }}</span>
-                <a :href="source.url" target="_blank" class="source-link">Source Link</a>
-              </li>
-            </ul>
+            <header class="ref-header" @click="toggleSection('historical')">
+              <h2 class="section-title">Photos in About Taiwan</h2>
+              <span class="chevron" :class="{ open: isSectionOpen('historical') }">▼</span>
+            </header>
+            <Transition name="expand">
+              <ul v-show="isSectionOpen('historical')" class="ref-list">
+                <li v-for="source in historicalSources" :key="source.name">
+                  <span class="source-name">{{ source.name }}</span>
+                  <a :href="source.url" target="_blank" class="source-link">Source Link</a>
+                </li>
+              </ul>
+            </Transition>
           </section>
 
           <section class="ref-section">
-            <h2 class="section-title">Spots & Photography</h2>
-            <ul class="ref-list">
-              <li v-for="ref in spotReferences" :key="ref.name">
-                <span class="source-name">{{ ref.name }}</span>
-                <template v-if="ref.url">
-                  <a :href="ref.url" target="_blank" class="source-link">Attraction Info</a>
-                </template>
-                <template v-else-if="ref.credit">
-                  <span class="source-credit">{{ ref.credit }}</span>
-                </template>
-              </li>
-            </ul>
+            <header class="ref-header" @click="toggleSection('spots')">
+              <h2 class="section-title">Photos of Spots</h2>
+              <span class="chevron" :class="{ open: isSectionOpen('spots') }">▼</span>
+            </header>
+            <Transition name="expand">
+              <ul v-show="isSectionOpen('spots')" class="ref-list">
+                <li v-for="ref in spotReferences" :key="ref.name">
+                  <span class="source-name">{{ ref.name }}</span>
+                  <template v-if="ref.url">
+                    <a :href="ref.url" target="_blank" class="source-link">Attraction Info</a>
+                  </template>
+                  <template v-else-if="ref.credit">
+                    <span class="source-credit">{{ ref.credit }}</span>
+                  </template>
+                </li>
+              </ul>
+            </Transition>
           </section>
 
           <section class="ref-section">
-            <h2 class="section-title">Food & Recipes</h2>
-            <ul class="ref-list">
-              <li v-for="ref in foodReferences" :key="ref.name">
-                <span class="source-name">{{ ref.name }}</span>
-                <a :href="ref.url" target="_blank" class="source-link">Original Source</a>
-              </li>
-            </ul>
+            <header class="ref-header" @click="toggleSection('food')">
+              <h2 class="section-title">Food & Recipes</h2>
+              <span class="chevron" :class="{ open: isSectionOpen('food') }">▼</span>
+            </header>
+            <Transition name="expand">
+              <ul v-show="isSectionOpen('food')" class="ref-list">
+                <li v-for="ref in foodReferences" :key="ref.name">
+                  <span class="source-name">{{ ref.name }}</span>
+                  <a :href="ref.url" target="_blank" class="source-link">Original Source</a>
+                </li>
+              </ul>
+            </Transition>
           </section>
         </div>
       </div>
@@ -150,20 +177,48 @@ const goBack = () => {
   flex-direction: column;
   background-color: var(--vanilla);
   border: 4px solid var(--dark_blue);
-  padding: 20px;
+  padding: 0;
+  overflow: hidden;
+}
+
+.ref-header {
+  padding: 15px 20px;
+  background-color: var(--vanilla);
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  transition: background-color 0.3s ease;
+}
+
+.ref-header:hover {
+  background-color: #fcebd2;
 }
 
 .section-title {
-  margin-top: 0;
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--dark_blue);
+}
+
+.chevron {
+  font-size: 1rem;
+  transition: transform 0.3s ease;
+  color: var(--dark_blue);
+}
+
+.chevron.open {
+  transform: rotate(180deg);
 }
 
 .ref-list {
   list-style: none;
-  padding: 0;
-  margin: 10px 0 0 0;
+  padding: 0 20px 20px 20px;
+  margin: 0;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  border-top: 2px solid var(--dark_blue);
 }
 
 .ref-list li {
@@ -215,5 +270,18 @@ const goBack = () => {
     text-align: right;
     max-width: 50%;
   }
+}
+
+/* Accordion Transition */
+.expand-enter-active,
+.expand-leave-active {
+  transition: all 0.3s ease-in-out;
+  max-height: 2000px;
+}
+
+.expand-enter-from,
+.expand-leave-to {
+  max-height: 0;
+  opacity: 0;
 }
 </style>

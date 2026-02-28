@@ -47,7 +47,7 @@ const { getMustSeeList, loadData } = useFavorites()
 const showGuide = ref(false)
 
 const onboardingSteps = [
-  { text: "Wish cards can be expanded to see more details.", target: "#first-wish-card", position: 'bottom' as const },
+  { text: "Wish cards can be expanded to see more details.", target: "#first-wish-card", position: 'center' as const },
   { text: "Click the heart button to save your favorites for later!", target: "#first-wish-card .heart-btn", position: 'bottom' as const }
 ]
 
