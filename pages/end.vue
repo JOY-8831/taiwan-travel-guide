@@ -67,11 +67,15 @@ const router = useRouter()
 
 .social-links {
   text-align: center;
-  margin: 20px auto;
+  margin: 10px auto 2px auto; /* 🎯 Reduced bottom margin further */
   font-family: 'Jersey 15', sans-serif;
   font-size: 1.2rem;
   color: var(--dark_blue);
-  line-height: 1.6;
+  line-height: 1.1; /* 🎯 Even tighter line-height */
+}
+
+.social-links p {
+  margin: 0;
 }
 
 .social-links a {
@@ -81,5 +85,9 @@ const router = useRouter()
 
 .social-links a:hover {
   color: var(--blue);
+}
+
+.button-container {
+  margin-top: 10px !important; /* 🎯 Overriding global 40px margin */
 }
 </style>
