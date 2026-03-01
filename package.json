@@ -18,6 +18,7 @@
     "@nuxt/ui": "^4.2.0",
     "@unhead/vue": "^2.0.19",
     "eslint": "^9.39.1",
+    "html2canvas": "^1.4.1",
     "nuxt": "^4.2.1",
     "typescript": "^5.9.3",
     "vue": "^3.5.24",

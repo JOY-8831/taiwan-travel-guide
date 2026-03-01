@@ -67,7 +67,7 @@ const getNextPage = (): string => {
 }
 
 const nextButtonText = computed(() => {
-    return getNextPage() === '/menu' ? 'Back to Menu' : 'Next Category >'
+  return getNextPage() === '/result' ? 'See the result!' : 'Next Category >'
 })
 
 const goNext = () => {

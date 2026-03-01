@@ -2,7 +2,7 @@
   <div id="result-page" class="page-layout">
     <ButtonBack @click="router.push('/must-eat')" />
 
-    <main class="frame">
+    <main id="result-content" class="frame">
       <header class="header-section">
         <h1 class="title">🎉 Your Taiwan Journey</h1>
         <p class="subtitle">Here’s a summary of everything you’ve picked for your trip!</p>
@@ -59,6 +59,7 @@
       </div>
 
       <div class="button-container">
+        <ButtonScreenshot targetId="result-content" />
         <ButtonNext
           text="Next: Watch a Video!"
           type="next"
@@ -74,6 +75,7 @@ import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
 import { useFavorites } from '~/composables/useFavorites'
 import { tours } from '~/assets/data/data.js'
+import ButtonScreenshot from '~/components/ButtonScreenshot.vue'
 
 const router = useRouter()
 const { getMustSeeList, getMustEatList, loadData, favoriteIds } = useFavorites()
@@ -122,7 +124,12 @@ const isEmpty = computed(() => {
 }
 
 .result-section {
-  margin-bottom: 30px; /* 🎯 Reduced from 50px */
+  margin-top: 0px; /* 🎯 Closer to previous element */
+  margin-bottom: 0px; /* 🎯 Tightened from 30px */
+}
+
+.header-section {
+  margin-bottom: 0px; /* 🎯 Overriding main.css for tighter top */
 }
 
 .tour-list {
@@ -135,7 +142,7 @@ const isEmpty = computed(() => {
   background: white;
   padding: 15px;
   border-radius: 12px;
-  border: 2px solid var(--dark_blue);
+  border: 4px solid var(--dark_blue); /* 🎯 Adjusted to 4px for consistency */
   box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
@@ -196,8 +203,23 @@ const isEmpty = computed(() => {
   padding: 40px;
   background: white;
   border-radius: 12px;
-  border: 2px dashed #ccc;
+  border: 4px dashed #ccc;
   color: #999;
 }
 
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 20px; /* 🎯 Space between buttons */
+  margin-top: 40px;
+  flex-wrap: wrap; /* Important for mobile */
+}
+
+/* 🎯 Hide elements during capture if needed (optional) */
+@media print {
+  .button-container {
+    display: none;
+  }
+}
 </style>

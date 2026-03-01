@@ -4,80 +4,10 @@
             {{ nameEN }}
             <span v-if="nameCH && showCH" class="ch-name">CH: {{ nameCH }}</span>
         </h3>
-        <button
-        class="heart-btn"
-        type="button"
-        :aria-pressed="isFav ? 'true' : 'false'"
-        :aria-label="isFav ? 'Remove from favorites' : 'Add to favorites'"
-        @click.stop.prevent="toggleFavorite(item)"
-        >
-            <svg v-show="!isFav" width="32" height="32" viewBox="0 0 16 14" aria-hidden="true" class="icon-outline">
-            <g>
-                <rect x="8.70996" y="1.45158" width="1.45166" height="1.45166" />
-                <rect x="10.1616" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="11.6133" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="13.0649" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="7.2583" y="2.90349" width="1.45166" height="1.45166" />
-                <rect x="5.80664" y="1.45158" width="1.45166" height="1.45166" />
-                <rect x="4.3551" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="2.90344" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="1.45178" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="14.5166" y="1.45158" width="1.45166" height="1.45166" />
-                <rect x="14.5166" y="2.90349" width="1.45166" height="1.45166" />
-                <rect x="14.5166" y="4.35493" width="1.45166" height="1.45166" />
-                <rect x="13.0649" y="5.80638" width="1.45166" height="1.45166" />
-                <rect x="11.6133" y="7.25829" width="1.45166" height="1.45166" />
-                <rect x="10.1616" y="8.71021" width="1.45166" height="1.45166" />
-                <rect x="8.70996" y="10.1617" width="1.45166" height="1.45166" />
-                <rect x="0.00012207" y="1.45158" width="1.45166" height="1.45166" />
-                <rect x="0.00012207" y="2.90349" width="1.45166" height="1.45166" />
-                <rect x="0.00012207" y="4.35493" width="1.45166" height="1.45166" />
-                <rect x="2.90344" y="7.25829" width="1.45166" height="1.45166" />
-                <rect x="1.45178" y="5.80638" width="1.45166" height="1.45166" />
-                <rect x="4.3551" y="8.71021" width="1.45166" height="1.45166" />
-                <rect x="5.80664" y="10.1617" width="1.45166" height="1.45166" />
-                <rect x="7.2583" y="11.6136" width="1.45166" height="1.45166" />
-            </g>
-            </svg>
-            <svg v-show="isFav" width="32" height="32" viewBox="0 0 20 16" aria-hidden="true" class="icon-filled">
-            <g>
-                <rect x="10.6667" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="12.4446" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="14.2222" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="16" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="8.88892" y="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="7.11108" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="5.3335" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="1.77783" y="0.000133514" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="1.77783" y="1.77797" width="5.33325" height="5.33301" fill="#D18FA1"/>
-                <rect x="12.4446" y="1.77797" width="5.33325" height="5.33301" fill="#D18FA1"/>
-                <rect x="7.11108" y="3.55526" width="5.33325" height="8.88916" fill="#D18FA1"/>
-                <rect x="17.7778" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="17.7778" y="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="17.7778" y="5.33338" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="16" y="7.11109" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="14.2222" y="8.8888" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="12.4446" y="10.6668" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="10.6667" y="12.4445" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect y="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect y="5.33338" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="3.55542" y="8.88881" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="5.33325" y="8.88881" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="5.33325" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="12.4443" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="12.4443" y="8.88875" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="14.2224" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="1.77783" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="3.55542" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="5.3335" y="10.6668" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="7.11108" y="12.4445" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="8.88892" y="14.2223" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="8.88892" y="12.4445" width="1.77778" height="1.77778" fill="#D18FA1"/>
-            </g>
-            </svg>
-        </button>
+        <HeartButton
+            :active="isFav"
+            @toggle="toggleFavorite(item)"
+        />
         <div class="card-image-wrapper">
             <img
             :src="imageSrc"
@@ -99,80 +29,10 @@
             <template v-if="item.City && !item.Code.startsWith('P-') && !item.Code.startsWith('F-')">
                 <span class="modal-city">({{ item.City }})</span>
             </template>
-           <button
-            class="heart-btn"
-            type="button"
-            :aria-pressed="isFav ? 'true' : 'false'"
-            :aria-label="isFav ? 'Remove from favorites' : 'Add to favorites'"
-            @click.stop.prevent="toggleFavorite(item)"
-            >
-            <svg v-show="!isFav" width="32" height="32" viewBox="0 0 16 14" aria-hidden="true" class="icon-outline">
-            <g>
-                <rect x="8.70996" y="1.45158" width="1.45166" height="1.45166" />
-                <rect x="10.1616" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="11.6133" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="13.0649" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="7.2583" y="2.90349" width="1.45166" height="1.45166" />
-                <rect x="5.80664" y="1.45158" width="1.45166" height="1.45166" />
-                <rect x="4.3551" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="2.90344" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="1.45178" y="0.000137329" width="1.45166" height="1.45166" />
-                <rect x="14.5166" y="1.45158" width="1.45166" height="1.45166" />
-                <rect x="14.5166" y="2.90349" width="1.45166" height="1.45166" />
-                <rect x="14.5166" y="4.35493" width="1.45166" height="1.45166" />
-                <rect x="13.0649" y="5.80638" width="1.45166" height="1.45166" />
-                <rect x="11.6133" y="7.25829" width="1.45166" height="1.45166" />
-                <rect x="10.1616" y="8.71021" width="1.45166" height="1.45166" />
-                <rect x="8.70996" y="10.1617" width="1.45166" height="1.45166" />
-                <rect x="0.00012207" y="1.45158" width="1.45166" height="1.45166" />
-                <rect x="0.00012207" y="2.90349" width="1.45166" height="1.45166" />
-                <rect x="0.00012207" y="4.35493" width="1.45166" height="1.45166" />
-                <rect x="2.90344" y="7.25829" width="1.45166" height="1.45166" />
-                <rect x="1.45178" y="5.80638" width="1.45166" height="1.45166" />
-                <rect x="4.3551" y="8.71021" width="1.45166" height="1.45166" />
-                <rect x="5.80664" y="10.1617" width="1.45166" height="1.45166" />
-                <rect x="7.2583" y="11.6136" width="1.45166" height="1.45166" />
-            </g>
-            </svg>
-            <svg v-show="isFav" width="32" height="32" viewBox="0 0 20 16" aria-hidden="true" class="icon-filled">
-            <g>
-                <rect x="10.6667" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="12.4446" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="14.2222" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="16" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="8.88892" y="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="7.11108" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="5.3335" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="1.77783" y="0.000133514" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="1.77783" y="1.77797" width="5.33325" height="5.33301" fill="#D18FA1"/>
-                <rect x="12.4446" y="1.77797" width="5.33325" height="5.33301" fill="#D18FA1"/>
-                <rect x="7.11108" y="3.55526" width="5.33325" height="8.88916" fill="#D18FA1"/>
-                <rect x="17.7778" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="17.7778" y="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="17.7778" y="5.33338" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="16" y="7.11109" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="14.2222" y="8.8888" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="12.4446" y="10.6668" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="10.6667" y="12.4445" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect y="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect y="5.33338" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="3.55542" y="8.88881" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="5.33325" y="8.88881" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="5.33325" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="12.4443" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="12.4443" y="8.88875" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="14.2224" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="1.77783" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="3.55542" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="5.3335" y="10.6668" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="7.11108" y="12.4445" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="8.88892" y="14.2223" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                <rect x="8.88892" y="12.4445" width="1.77778" height="1.77778" fill="#D18FA1"/>
-            </g>
-            </svg>
-           </button>
+           <HeartButton
+                :active="isFav"
+                @toggle="toggleFavorite(item)"
+            />
         </div>
 
         <div class="modal-body">
@@ -216,6 +76,7 @@
 <script setup lang="ts">
 import { ref, computed } from 'vue'
 import { useFavorites } from '~/composables/useFavorites'
+import HeartButton from './HeartButton.vue'
 
 const config = useRuntimeConfig()
 const baseURL = config.app.baseURL

@@ -24,7 +24,7 @@
       <main class="frame">
         <div class="header-section">
           <h1 class="title">Explore Tours</h1>
-          <p class="subtitle">Discover the beauty of Taiwan through our curated tours.</p>
+          <p class="subtitle">Note: While this route covers many must-see spots in the same area, visiting more than 4 in one day can feel rushed. We recommend reading the descriptions and picking your favorites to create a trip that fits your pace</p>
           
           <div v-if="userStyles.length > 0" class="tag-container">
             <span v-for="style in userStyles" :key="style" class="style-tag">
@@ -43,80 +43,10 @@
 
           <div class="tour-header">
             <h2 class="tour-title">{{ tour.title }}</h2>
-            <!-- 🎯 Heart Button for Selection (Unified with WishCard) -->
-            <button 
-              class="heart-btn" 
-              :class="{ 'active': isSelected(tour.id) }"
-              @click="toggleTour(tour.id)"
-              aria-label="Add to favorites"
-            >
-                <svg v-show="!isSelected(tour.id)" width="32" height="32" viewBox="0 0 16 14" aria-hidden="true" class="icon-outline">
-                <g>
-                    <rect x="8.70996" y="1.45158" width="1.45166" height="1.45166" />
-                    <rect x="10.1616" y="0.000137329" width="1.45166" height="1.45166" />
-                    <rect x="11.6133" y="0.000137329" width="1.45166" height="1.45166" />
-                    <rect x="13.0649" y="0.000137329" width="1.45166" height="1.45166" />
-                    <rect x="7.2583" y="2.90349" width="1.45166" height="1.45166" />
-                    <rect x="5.80664" y="1.45158" width="1.45166" height="1.45166" />
-                    <rect x="4.3551" y="0.000137329" width="1.45166" height="1.45166" />
-                    <rect x="2.90344" y="0.000137329" width="1.45166" height="1.45166" />
-                    <rect x="1.45178" y="0.000137329" width="1.45166" height="1.45166" />
-                    <rect x="14.5166" y="1.45158" width="1.45166" height="1.45166" />
-                    <rect x="14.5166" y="2.90349" width="1.45166" height="1.45166" />
-                    <rect x="14.5166" y="4.35493" width="1.45166" height="1.45166" />
-                    <rect x="13.0649" y="5.80638" width="1.45166" height="1.45166" />
-                    <rect x="11.6133" y="7.25829" width="1.45166" height="1.45166" />
-                    <rect x="10.1616" y="8.71021" width="1.45166" height="1.45166" />
-                    <rect x="8.70996" y="10.1617" width="1.45166" height="1.45166" />
-                    <rect x="0.00012207" y="1.45158" width="1.45166" height="1.45166" />
-                    <rect x="0.00012207" y="2.90349" width="1.45166" height="1.45166" />
-                    <rect x="0.00012207" y="4.35493" width="1.45166" height="1.45166" />
-                    <rect x="2.90344" y="7.25829" width="1.45166" height="1.45166" />
-                    <rect x="1.45178" y="5.80638" width="1.45166" height="1.45166" />
-                    <rect x="4.3551" y="8.71021" width="1.45166" height="1.45166" />
-                    <rect x="5.80664" y="10.1617" width="1.45166" height="1.45166" />
-                    <rect x="7.2583" y="11.6136" width="1.45166" height="1.45166" />
-                </g>
-                </svg>
-                <svg v-show="isSelected(tour.id)" width="32" height="32" viewBox="0 0 20 16" aria-hidden="true" class="icon-filled">
-                <g>
-                    <rect x="10.6667" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="12.4446" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="14.2222" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="16" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="8.88892" y="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="7.11108" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="5.3335" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="1.77783" y="0.000133514" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="1.77783" y="1.77797" width="5.33325" height="5.33301" fill="#D18FA1"/>
-                    <rect x="12.4446" y="1.77797" width="5.33325" height="5.33301" fill="#D18FA1"/>
-                    <rect x="7.11108" y="3.55526" width="5.33325" height="8.88916" fill="#D18FA1"/>
-                    <rect x="17.7778" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="17.7778" y="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="17.7778" y="5.33338" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="16" y="7.11109" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="14.2222" y="8.8888" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="12.4446" y="10.6668" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="10.6667" y="12.4445" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect y="3.55566" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect y="5.33338" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="3.55542" y="8.88881" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="5.33325" y="8.88881" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="5.33325" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="12.4443" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="12.4443" y="8.88875" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="14.2224" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="1.77783" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="3.55542" y="7.11097" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="5.3335" y="10.6668" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="7.11108" y="12.4445" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="8.88892" y="14.2223" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                    <rect x="8.88892" y="12.4445" width="1.77778" height="1.77778" fill="#D18FA1"/>
-                </g>
-                </svg>
-            </button>
+            <AddToList 
+              :active="isSelected(tour.id)"
+              @toggle="toggleTour(tour.id)"
+            />
           </div>
           <p class="tour-desc">{{ tour.description }}</p>
 
@@ -173,6 +103,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import AddToList from '../components/AddToList.vue'
 
 const config = useRuntimeConfig()
 const baseURL = config.app.baseURL
@@ -253,7 +184,7 @@ const toggleTour = (id: string) => {
   if (selectedTours.value.includes(id)) {
     selectedTours.value = selectedTours.value.filter(t => t !== id);
   } else {
-    selectedTours.value.push(id);
+    selectedTours.value = [...selectedTours.value, id];
   }
   localStorage.setItem('selectedTours', JSON.stringify(selectedTours.value));
 }
@@ -382,7 +313,7 @@ const scrollToBottom = () => {
 <style scoped>
 #tours-page.page-layout {
   display: block; /* 🎯 More predictable for vertical sticky */
-  padding-top: 60px;
+  padding-top: 20px;
   padding-bottom: 120px;
   min-height: 100vh;
   background-color: #f9f7f2; 
@@ -404,7 +335,7 @@ const scrollToBottom = () => {
 
 .header-section {
   text-align: left; 
-  margin-bottom: 40px;
+  margin-bottom: 0px;
   padding-left: 10px;
 }
 
@@ -412,19 +343,20 @@ const scrollToBottom = () => {
   font-family: 'Jersey 15', sans-serif;
   font-size: 3rem;
   color: var(--dark_blue);
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 
 .subtitle {
   font-size: 1.4rem;
   color: #666;
+  line-height: 1.2;
 }
 
 .tag-container {
   display: flex;
   justify-content: flex-start;
   gap: 10px;
-  margin-top: 15px;
+  margin-top: 10px;
 }
 
 .style-tag {
@@ -451,7 +383,7 @@ const scrollToBottom = () => {
 
 .sticky-bar {
   padding: 15px 0 10px 0;
-  margin-bottom: 24px;
+  margin-bottom: 10px;
   width: 100%;
   max-width: 900px; 
   padding-left: 10px;
@@ -513,8 +445,11 @@ const scrollToBottom = () => {
   display: flex;
   flex-direction: column;
   gap: 5px; 
-  padding-bottom: 30px;
-  border-bottom: 2px dashed #ddd; /* Separator between tours */
+  padding-top: 10px; 
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px; 
+  border-bottom: 2px dashed #ddd;
 }
 
 .tour-block:last-child {
@@ -525,8 +460,8 @@ const scrollToBottom = () => {
   display: flex;
   flex-wrap: wrap;
   align-items: center; 
-  gap: 8px;
-  margin-bottom: 2px;
+  gap: 15px; /* 🎯 Increased gap for better separation */
+  margin-bottom: 0;
 }
 
 .tour-title {
@@ -536,28 +471,6 @@ const scrollToBottom = () => {
   margin: 0;
 }
 
-.heart-btn {
-  background: none;
-  border: none;
-  padding: 4px;
-  cursor: pointer;
-  color: var(--dark_blue); 
-  transition: all 0.2s;
-  line-height: 1;
-}
-
-.heart-btn .icon-outline rect {
-    fill: #ccc; 
-}
-
-.heart-btn.active .icon-outline rect {
-    fill: var(--pink); 
-}
-
-.heart-btn.active {
-  color: var(--pink);
-  transform: scale(1.1);
-}
 
 .tour-desc {
   color: #555;
@@ -566,7 +479,7 @@ const scrollToBottom = () => {
   max-width: 700px;
   width: 100%; 
   margin-top: -2px; 
-  margin-bottom: 8px; 
+  margin-bottom: 5px; 
 }
 
 .tour-flow {
