@@ -1,0 +1,1 @@
+import{_ as r,z as n,A as s,D as l,a8 as c,B as o,g as d}from"./Dhb-oGz8.js";const u={},_={class:"page-wrapper"};function f(t,e){const a=d("BackButton");return s(),n("div",_,[l(a),c(t.$slots,"default"),e[0]||(e[0]=o("footer",null,[o("p",null,"© 2025 Build Your Taiwan Journey | Created with ❤️ for travelers")],-1))])}const B=r(u,[["render",f]]);export{B as default};

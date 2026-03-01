@@ -1,0 +1,1 @@
+import{d as o,z as s,C as i,A as p}from"./Dhb-oGz8.js";const a=o({__name:"OptionSingle",props:{text:{}},emits:["select"],setup(e){return(n,t)=>(p(),s("button",{class:"option-btn",onClick:t[0]||(t[0]=c=>n.$emit("select"))},i(e.text),1))}}),m=Object.assign(a,{__name:"OptionSingle"});export{m as _};
