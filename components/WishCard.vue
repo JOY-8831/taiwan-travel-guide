@@ -46,8 +46,14 @@
             </div>
 
             <div class="modal-source-info">
-                <p class="source-label">Image source:</p>
-                <p class="source-name">交通部觀光署</p>
+                <p class="source-label">Find the closest ones to me:</p>
+                <a 
+                    :href="googleMapsUrl" 
+                    target="_blank" 
+                    class="source-name"
+                >
+                    Go to Google Map
+                </a>
             </div>
 
             <div class="modal-details">
@@ -65,7 +71,7 @@
             <ButtonOk
             text="ok!"
             type="ok"
-            @click=closeModal()
+            @click="closeModal()"
         />
         </div>
     </div>
@@ -89,6 +95,8 @@ const props = withDefaults(defineProps<{
         City?: string;
         Details?: string;
         Img_source?: string;
+        Lat?: number;
+        Lng?: number;
     };
     showCH?: boolean;
 }>(), {
@@ -96,6 +104,20 @@ const props = withDefaults(defineProps<{
 })
 
 const { isFavorite, toggleFavorite } = useFavorites()
+
+// --- Google Maps URL with Coordinate Bias ---
+const googleMapsUrl = computed(() => {
+    // 🎯 Use specific item coordinates if available, otherwise fallback to Taipei Main Station
+    const lat = props.item.Lat || 25.0478
+    const lng = props.item.Lng || 121.4
+    
+    // 🎯 Add City to query for better search results
+    const query = `${nameEN.value}${props.item.City ? ', ' + props.item.City : ''}`
+    
+    // 🎯 Using @lat,lng,zoom to bias results to Taiwan and prevent global/US view
+    // 🎯 Zoom 11z provides a broader view (approx 20km) per user request
+    return `https://www.google.com.tw/maps/search/${encodeURIComponent(query)}/@${lat},${lng},11z`
+})
 
 // --- 圖片載入狀態與邏輯 ---
 const defaultImage = ref(`${baseURL}images/fallback.jpg`)
@@ -370,7 +392,7 @@ const structuredDetails = computed(() => {
     flex-direction: column;
     font-size: 22;  /* 1.2rem; */
     line-height: 1.6;
-    padding: 20px 40px; /* 🎯 Unified horizontal padding */
+    padding: 10px 15px; /* 🎯 Adjusted padding per user request */
     gap: 8px; /* 🎯 模擬 Frame 73 的間距 */
 }
 
@@ -383,8 +405,8 @@ const structuredDetails = computed(() => {
     justify-content: center;
     align-items: center;
     box-sizing: border-box;
-    border-radius: 12px; /* 🎯 Add rounded corners for a framed look */
-    border: 2px solid var(--dark_blue); /* 🎯 Add subtle border to define the image */
+    border-radius: 0; /* 🎯 Removed rounded corners per user request */
+    border: none; /* 🎯 Removed border per user request */
 }
 
 .modal-image {
@@ -419,14 +441,13 @@ const structuredDetails = computed(() => {
 }
 
 .source-name {
-    /* Ch-Context-S (jf-openhuninn-2.1, 10px, Blue, Underline) */
-    font-family: 'jf-openhuninn-2.1';
-    font-size: 14px; /* 🎯 Fix: Increase font size */
+    /* Updated font to Jersey 15 per user request */
+    font-family: 'Jersey 15', sans-serif;
+    font-size: 1.1rem; /* Slightly larger for readability */
     line-height: 1.4;
     letter-spacing: 0.02em;
     text-decoration-line: underline;
-    /* 這邊應該要改成url吧 */
-    color: var(--blue); /* #5C8AA7 */
+    color: var(--blue);
 }
 
 /* ------------------- 說明區塊 ------------------- */
@@ -451,7 +472,7 @@ const structuredDetails = computed(() => {
 
 .modal-description p {
     margin: 0 0 5px 0; /* 讓段落之間有小間距 */
-
+    line-height: 1.2; /* 🎯 Updated line-height per user request */
 }
 
 .modal-description .example-label {

@@ -3,6 +3,5 @@
     <NuxtLayout>
       <NuxtPage />
     </NuxtLayout>
-    <!-- <BackgroundMusic /> -->
   </div>
 </template>

@@ -45,49 +45,79 @@ const router = useRouter()
 
 <style scoped>
 #end-page {
-  background-color: #f9f7f2;
+  background-color: #171717; /* Dark Grey (BG) */
+  min-height: 100vh;
+  color: #F3D5BA; /* Vanila */
+  font-family: 'Jersey 15', sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  overflow-x: hidden;
 }
 
 .header-section {
-  text-align: center; /* Override global left */
-  margin-bottom: 20px;
-}
-
-.video-container {
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  max-width: 650px; /* 🎯 Slightly smaller to fit on one screen */
-  margin: 0 auto;
-  border: 4px solid var(--dark_blue);
-  border-radius: 16px;
-  overflow: hidden;
-  box-shadow: 10px 10px 0px rgba(0,0,0,0.1);
-}
-
-
-.social-links {
+  padding: 0 24px;
   text-align: center;
-  margin: 10px auto 2px auto; /* 🎯 Reduced bottom margin further */
-  font-family: 'Jersey 15', sans-serif;
-  font-size: 1.2rem;
-  color: var(--dark_blue);
-  line-height: 1.1; /* 🎯 Even tighter line-height */
+  margin-top: 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.social-links p {
+.title {
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 0;
+  font-weight: normal;
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #D6D6D6; /* Light Grey */
   margin: 0;
 }
 
+.video-container {
+  width: calc(100% - 48px);
+  aspect-ratio: 16 / 9;
+  max-width: 650px;
+  margin: 0 auto;
+  border: 8px solid #001D62; /* Dark Blue border */
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: 0 0 20px rgba(0,0,0,0.5);
+}
+
+.social-links {
+  text-align: center;
+  margin: 10px auto;
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 1.4rem;
+  color: #F3D5BA;
+  line-height: 1.4;
+  padding: 0 24px;
+}
+
+.social-links p {
+  margin: 8px 0;
+}
+
 .social-links a {
-  color: var(--pink);
+  color: #D18FA1; /* Pink */
   text-decoration: underline;
 }
 
 .social-links a:hover {
-  color: var(--blue);
+  color: #5C8AA7; /* Modern Blue */
 }
 
 .button-container {
-  margin-top: 10px !important; /* 🎯 Overriding global 40px margin */
+  display: flex;
+  justify-content: center;
+  margin-top: 5px;
+  padding: 0 24px;
 }
 </style>

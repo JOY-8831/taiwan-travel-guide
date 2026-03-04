@@ -147,35 +147,73 @@ const handleSubmit = async () => {
 
 <style scoped>
 #email-page {
-  background-color: #f9f7f2;
+  background-color: #171717; /* Dark Grey (BG) */
+  min-height: 100vh;
+  color: #F3D5BA; /* Vanila */
+  font-family: 'Jersey 15', sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  overflow-x: hidden;
+}
+
+.header-section {
+  padding: 0 24px;
+  margin-bottom: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 0;
+  font-weight: normal;
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #D6D6D6; /* Light Grey */
+  margin: 0;
 }
 
 .form-section {
+  padding: 0 24px;
   display: flex;
   flex-direction: column;
-  gap: 15px; /* 🎯 Tightened from 30px */
+  gap: 24px;
 }
 
 .input-group {
   display: flex;
   flex-direction: column;
-  gap: 4px; /* 🎯 Tightened from 10px */
+  gap: 8px;
 }
 
 .input-label {
   font-family: 'Jersey 15', sans-serif;
-  font-size: 1.5rem;
-  color: var(--dark_blue);
+  font-size: 1.8rem;
+  color: #F3D5BA;
+  font-weight: normal;
 }
 
 .custom-input, .custom-textarea {
-  padding: 10px 15px; /* 🎯 Reduced vertical padding */
+  padding: 12px 16px;
   border-radius: 12px;
-  border: 2px solid var(--dark_blue);
+  border: 4px solid #001D62; /* Dark Blue border */
   font-size: 1.1rem;
   font-family: inherit;
-  background: white;
-  box-shadow: 4px 4px 0px rgba(0,0,0,0.05);
+  background: #C3DFF1; /* Light Blue for contrast */
+  color: #001D62;
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
+}
+
+.custom-input::placeholder, .custom-textarea::placeholder {
+  color: rgba(0, 29, 98, 0.5);
 }
 
 .custom-textarea {
@@ -184,20 +222,26 @@ const handleSubmit = async () => {
 }
 
 .promo-box {
-  background: #fff0f5;
+  background: rgba(209, 143, 161, 0.1); /* Subtle pink background */
   padding: 20px;
   border-radius: 12px;
-  border: 2px dashed var(--pink);
+  border: 4px dashed #D18FA1; /* Pink dashed border */
 }
 
 .promo-text {
-  color: #a04060;
-  line-height: 1.6;
-  font-size: 1.1rem;
+  color: #D18FA1;
+  line-height: 1.4;
+  font-size: 1.2rem;
   margin: 0;
 }
 
-
+.button-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 40px;
+  padding: 0 24px;
+}
 
 /* Success Modal */
 .success-overlay {
@@ -214,31 +258,42 @@ const handleSubmit = async () => {
 }
 
 .success-card {
-  background: white;
+  background: #171717;
   padding: 40px;
   border-radius: 20px;
   text-align: center;
   max-width: 400px;
   width: 90%;
-  border: 4px solid var(--pink);
+  border: 8px solid #001D62;
+  color: #F3D5BA;
+  box-shadow: 0 0 30px rgba(0,0,0,0.5);
 }
 
 .success-card h2 {
   font-family: 'Jersey 15', sans-serif;
   font-size: 2.5rem;
-  color: var(--dark_blue);
-  margin-bottom: 15px;
+  color: #F3D5BA;
+  margin-bottom: 24px;
+  font-weight: normal;
+}
+
+.success-card p {
+  font-size: 1.4rem;
+  margin-bottom: 24px;
 }
 
 .home-btn {
-  margin-top: 5px;
-  padding: 12px 30px;
-  background: var(--dark_blue);
-  color: white;
+  padding: 12px 32px;
+  background: #F3D5BA;
+  color: #171717;
   border: none;
-  border-radius: 10px;
   font-family: 'Jersey 15', sans-serif;
   font-size: 1.5rem;
   cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.home-btn:hover {
+  transform: scale(1.1);
 }
 </style>

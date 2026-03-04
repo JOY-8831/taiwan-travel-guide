@@ -1,6 +1,6 @@
 <template>
   <div id="tours-page" class="page-layout">
-    <ButtonBack @click="goBack" />
+    <ButtonBack :dark="true" @click="goBack" />
 
     <!-- Region Filter Bar: Stable Sticky Container -->
     <div v-show="showRegionFilter" class="sticky-bar-wrapper">
@@ -26,9 +26,9 @@
           <h1 class="title">Explore Tours</h1>
           <p class="subtitle">Note: While this route covers many must-see spots in the same area, visiting more than 4 in one day can feel rushed. We recommend reading the descriptions and picking your favorites to create a trip that fits your pace</p>
           
-          <div v-if="userStyles.length > 0" class="tag-row">
-            <span v-for="style in userStyles" :key="style" class="tag" :style="{ borderColor: getStyleColor(style), color: getStyleColor(style) }">
-              <span class="hash">#</span> {{ getStyleLabel(style) }}
+          <div v-if="userStyles.length > 0" class="tag-container">
+            <span v-for="style in userStyles" :key="style" class="style-tag">
+              # {{ getStyleLabel(style) }}
             </span>
           </div>
         </div>
@@ -43,17 +43,10 @@
 
           <div class="tour-header">
             <h2 class="tour-title">{{ tour.title }}</h2>
-            <button 
-              class="add-list-btn" 
-              :class="{ selected: isSelected(tour.id) }"
-              @click="toggleTour(tour.id)"
-            >
-              <span>{{ isSelected(tour.id) ? 'In your list' : 'Add to list' }}</span>
-              <!-- Small Heart Icon -->
-              <svg width="14" height="12" viewBox="0 0 16 14" fill="none" class="heart-icon-small">
-                <path d="M8 14L6.85 12.85C2.75 9.15 0 6.65 0 3.6C0 1.6 1.6 0 3.6 0C4.75 0 5.85 0.55 6.55 1.4C7.25 0.55 8.35 0 9.5 0C11.5 0 13.1 1.6 13.1 3.6C13.1 6.65 10.35 9.15 6.25 12.85L8 14Z" :fill="isSelected(tour.id) ? '#D18FA1' : 'none'" :stroke="isSelected(tour.id) ? '#D18FA1' : '#C3DFF1'" stroke-width="2"/>
-              </svg>
-            </button>
+            <AddToList 
+              :active="isSelected(tour.id)"
+              @toggle="toggleTour(tour.id)"
+            />
           </div>
           <p class="tour-desc">{{ tour.description }}</p>
 
@@ -62,19 +55,20 @@
             <template v-for="(code, index) in tour.pointCodes" :key="code">
               <!-- Spot Card -->
               <div class="spot-card" :style="{ borderColor: getEraColor(code) }">
-                <div class="spot-img-container">
+                <div class="spot-img-wrapper">
                   <img 
                     :src="getImgSrc(code)" 
                     class="spot-img"
                     @error="handleSpotImageError($event, code)"
                   >
                 </div>
-                <div class="spot-details-brief">
-                  <h3 class="spot-name-small">
+                <!-- 🎯 Added Spot Info Wrapper -->
+                <div class="spot-info">
+                  <div class="spot-name">
                     {{ getPointInfo(code).Name_EN }}
-                    <span class="spot-ch-small">{{ getPointInfo(code).Name_CH }}</span>
-                  </h3>
-                  <p class="spot-brief-small">{{ getPointInfo(code).Details }}</p>
+                    <span class="ch-name">CH: {{ getPointInfo(code).Name_CH }}</span>
+                  </div>
+                  <span class="spot-details">{{ getPointInfo(code).Details }}</span>
                 </div>
               </div>
 
@@ -108,6 +102,7 @@
 <script setup lang="ts">
 import { ref, onMounted, computed } from 'vue'
 import { useRouter } from 'vue-router'
+import AddToList from '../components/AddToList.vue'
 
 const config = useRuntimeConfig()
 const baseURL = config.app.baseURL
@@ -139,8 +134,8 @@ const regionFilter = ref<'N' | 'SE'>('N')
 
 // 🎯 Data for currentRegion / regions
 const regions = [
-  { name: 'North', code: 'N' as const },
-  { name: 'South-East', code: 'SE' as const }
+  { name: '🏙️ North', code: 'N' as const },
+  { name: '🌺 South-East', code: 'SE' as const }
 ]
 
 const currentRegion = computed({
@@ -238,24 +233,14 @@ const getPointInfo = (code: string | undefined): Partial<Wish> => {
 const getEraColor = (code: string): string => {
   const spot = getPointInfo(code);
   const eraColors: Record<string, string> = {
-    'Modern': '#5C8AA7',
-    'Japanese': '#CC9665',
-    'Qing': '#D18FA1',
-    'Discovery': '#8EB16E',
-    'Indigenous': '#8EB16E'
+    'Modern':     '#001D62', // Dark blue
+    'Japanese':   '#B85A2A', // Terracotta orange
+    'Qing':       '#8B2323', // Deep red
+    'Discovery':  '#1A6B6B', // Teal (Dutch/Spanish colonial)
+    'Indigenous': '#4A7A2A', // Earthy green
   };
-  return eraColors[(spot as Wish).Era] ?? '#5C8AA7';
+  return eraColors[(spot as Wish).Era] ?? '#001D62';
 };
-
-const getStyleColor = (style: string) => {
-  const colors: Record<string, string> = {
-    'C': '#5C8AA7',
-    'N': '#8EB16E',
-    'M': '#D18FA1',
-    'R': '#CC9665'
-  }
-  return colors[style] || '#5C8AA7'
-}
 
 const getStyleLabel = (style: string): string => {
   const labels: Record<string, string> = {
@@ -326,136 +311,144 @@ const scrollToBottom = () => {
 
 <style scoped>
 #tours-page.page-layout {
-  background-color: #171717; /* Dark Grey (BG) */
+  display: block; /* 🎯 More predictable for vertical sticky */
+  padding-top: 20px;
+  padding-bottom: 120px;
   min-height: 100vh;
-  color: #F3D5BA; /* Vanila */
-  font-family: 'Jersey 15', sans-serif;
-  display: flex;
-  flex-direction: column;
-  padding: 40px 0;
-  overflow-x: hidden;
+  background-color: #f9f7f2; 
 }
 
 .tours-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: center; /* 🎯 Content centered like original */
   width: 100%;
 }
 
 .frame {
-  max-width: 900px;
-  width: 100%;
+  max-width: 900px; 
   margin: 0 auto;
-  position: relative;
-  background-color: #171717;
-  padding: 0;
+  width: 100%;
+  position: relative; 
 }
 
 .header-section {
-  padding: 0 24px;
-  margin-bottom: 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  width: 100%;
-  box-sizing: border-box;
+  text-align: left; 
+  margin-bottom: 0px;
+  padding-left: 10px;
 }
 
 .title {
   font-family: 'Jersey 15', sans-serif;
   font-size: 3rem;
-  line-height: 1.1;
-  margin: 0;
-  font-weight: normal;
+  color: var(--dark_blue);
+  margin-bottom: 0px;
 }
 
 .subtitle {
   font-size: 1.4rem;
+  color: #666;
   line-height: 1.2;
-  letter-spacing: 0.02em;
-  color: #D6D6D6; /* Light Grey */
-  margin: 0;
 }
 
-/* Tag Styles */
-.tag-row {
+.tag-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
-  margin-top: 8px;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-top: 10px;
 }
 
-.tag {
-  display: flex;
-  align-items: center;
-  padding: 6px 8px;
-  gap: 4px;
-  border-radius: 36px;
-  border: 2px solid;
-  font-size: 16px;
+.style-tag {
+  background: white;
+  color: var(--pink);
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  border: 4px solid var(--pink); /* 🎯 Pink frame wrapping them */
 }
 
-.hash {
-  opacity: 0.8;
-}
-
-/* Region Filter Bar */
+/* Region Filter Bar & Sticky Logic */
 .sticky-bar-wrapper {
-  position: sticky;
+  position: -webkit-sticky; /* For Safari */
+  position: sticky; 
   top: 0;
   z-index: 2000;
-  background-color: #171717;
+  background-color: #f9f7f2; 
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 0 24px 16px;
-  box-sizing: border-box;
 }
 
 .sticky-bar {
+  padding: 40px 0 10px 0;
+  margin-bottom: 10px;
   width: 100%;
-  max-width: 900px;
+  max-width: 900px; 
+  padding-left: 10px;
+  padding-right: 10px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.05); 
 }
 
 .region-filter-bar {
+  box-sizing: border-box;
   display: flex;
-  background: #001D62;
-  border-bottom: 4px solid #001D62;
+  flex-direction: row;
+  align-items: center;
+  width: 100%;
+  gap: 0;
 }
 
 .region-btn {
-  flex: 1;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   padding: 8px 16px;
+  gap: 10px;
+  height: 40px;
+  flex: 1;
+  background: #F3D5BA;
   border: 4px solid #001D62;
-  background: #001D62;
-  color: #F3D5BA;
-  font-family: 'Jersey 15';
-  font-size: 1.2rem;
+  color: #001D62;
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 1.1rem;
   cursor: pointer;
-  text-align: center;
+  transition: background 0.2s, color 0.2s;
+  letter-spacing: 0.03em;
+}
+
+.region-btn:first-child {
+  border-right: 2px solid #001D62;
+}
+
+.region-btn:last-child {
+  border-left: 2px solid #001D62;
 }
 
 .region-btn.active {
-  background: #F3D5BA;
-  color: #001D62;
+  background: #001D62;
+  color: #F3D5BA;
+  font-weight: bold;
 }
 
-.tour-grid {
-  padding: 0 24px;
+.tour-list {
   display: flex;
   flex-direction: column;
-  gap: 24px;
-  width: 100%;
-  box-sizing: border-box;
+  gap: 50px; 
 }
 
+/* 🎯 Restored Original DASHED Styles from tours_old.vue */
 .tour-block {
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  border-bottom: 2px dashed #444;
-  padding-bottom: 24px;
+  gap: 5px; 
+  padding-top: 10px; 
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px; 
+  border-bottom: 2px dashed #ddd;
 }
 
 .tour-block:last-child {
@@ -464,89 +457,72 @@ const scrollToBottom = () => {
 
 .tour-header {
   display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
+  flex-wrap: wrap;
+  align-items: center; 
+  gap: 15px; /* 🎯 Increased gap for better separation */
+  margin-bottom: 0;
 }
 
 .tour-title {
+  font-family: 'Jersey 15', sans-serif;
   font-size: 2rem;
-  line-height: 1.1;
+  color: var(--dark_blue);
   margin: 0;
-  font-weight: normal;
 }
 
-/* New Add to List Button Style (User Requested) */
-.add-list-btn {
-  box-sizing: border-box;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  padding: 8px 12px;
-  gap: 8px;
-  /* margin: 0 auto; */ /* Centering removed to allow justify-between to work */
-  width: auto; /* Changed to auto to fit content and padding */
-  min-width: 108.97px;
-  height: 32px;
-  background: none;
-  border: 2px solid #C3DFF1;
-  color: #C3DFF1;
-  font-family: 'Jersey 15';
-  font-size: 16px;
-  cursor: pointer;
-  flex: none;
-  order: 1;
-  flex-grow: 0;
-}
-
-.add-list-btn.selected {
-  border-color: #D18FA1;
-  color: #D18FA1;
-}
-
-.add-list-btn.selected svg path {
-  fill: #D18FA1;
-  stroke: #D18FA1;
-}
 
 .tour-desc {
-  font-size: 1.2rem;
+  color: #555;
   line-height: 1.3;
-  color: #D6D6D6;
-  margin: 0 0 16px 0;
+  font-size: 1.2rem;
+  max-width: 700px;
+  width: 100%; 
+  margin-top: -2px; 
+  margin-bottom: 5px; 
 }
 
 .tour-flow {
   display: flex;
-  gap: 8px;
-  overflow-x: auto;
-  padding-bottom: 14px;
-  scrollbar-width: thin;
-  scrollbar-color: #656669 transparent;
-  align-items: stretch;
+  align-items: center;
+  gap: 15px;
+  overflow-x: auto; 
+  padding: 10px 10px 15px 10px; 
+  scrollbar-width: thin; 
+  scrollbar-color: var(--pink) transparent;
 }
 
 .tour-flow::-webkit-scrollbar {
   height: 8px;
 }
 .tour-flow::-webkit-scrollbar-thumb {
-  background: #656669;
-  border-radius: 6px;
+  background-color: var(--pink);
+  border-radius: 4px;
+}
+.tour-flow::-webkit-scrollbar-track {
+  background: transparent;
 }
 
 .spot-card {
-  flex: 0 0 200px;
-  background: #C3DFF1;
-  border: 4px solid;
-  padding: 4px;
+  flex: 0 0 auto; 
+  width: 200px; 
+  height: 280px; 
   display: flex;
   flex-direction: column;
+  gap: 8px;
+  background: white;
+  padding: 12px;
+  border-radius: 12px;
+  border: 2px solid var(--dark_blue);
+  box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
 }
 
-.spot-img-container {
+.spot-img-wrapper {
   width: 100%;
-  height: 120px;
+  height: 120px; 
+  border-radius: 8px;
   overflow: hidden;
+  background: #eee;
+  flex-shrink: 0;
 }
 
 .spot-img {
@@ -555,47 +531,58 @@ const scrollToBottom = () => {
   object-fit: cover;
 }
 
-.spot-details-brief {
-  padding: 8px 10px;
+.spot-info {
   display: flex;
   flex-direction: column;
   gap: 4px;
-  color: #001D62;
+  flex: 1; 
 }
 
-.spot-name-small {
-  font-size: 1.1rem;
-  line-height: 1;
-  margin: 0;
+.spot-name {
+  font-size: 1.1rem; 
+  font-weight: bold;
+  color: #333;
+  line-height: 1.3;
   display: flex;
   flex-direction: column;
-  gap: 4px;
+  text-align: left;
+  align-items: flex-start;
 }
 
-.spot-ch-small {
+.ch-name {
   font-size: 0.9rem;
-  line-height: 1;
+  font-weight: normal;
+  color: #666;
 }
 
-.spot-brief-small {
-  font-size: 1rem;
-  line-height: 1.2;
-  color: #656669;
-  margin: 0;
-  overflow: visible;
+.spot-details {
+  font-size: 0.85rem;
+  color: #666;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.4;
 }
 
 .flow-arrow {
   flex: 0 0 auto;
-  align-self: center;
-  color: #656669;
-  font-size: 1.2rem;
-  margin: 0 4px;
+  color: #ddd; 
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.next-section {
+  display: flex;
+  justify-content: center;
+  margin-top: 60px;
 }
 
 .scroll-controls {
   position: fixed;
-  bottom: 100px;
+  bottom: 30px;
   right: 30px;
   display: flex;
   flex-direction: column;
@@ -607,18 +594,20 @@ const scrollToBottom = () => {
   width: 50px;
   height: 50px;
   border-radius: 50%;
-  background: #001D62;
-  color: #F3D5BA;
-  border: 2px solid #F3D5BA;
+  background: var(--dark_blue);
+  color: white;
+  border: 2px solid var(--vanilla);
   font-size: 1.5rem;
   cursor: pointer;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background 0.2s;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: transform 0.2s;
 }
 
 .scroll-btn:hover {
-  transform: scale(1.1);
+  transform: translateY(-3px);
+  background: var(--pink);
 }
 </style>

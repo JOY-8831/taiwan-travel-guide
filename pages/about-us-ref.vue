@@ -48,6 +48,7 @@ const spotReferences = [
 ]
 
 const foodReferences = [
+  { name: 'Vegan restaurants (食尚玩家)', url: 'https://supertaste.tvbs.com.tw/pack/344839' },
   { name: 'Ciao Kitchen (巧兒灶咖)', url: 'https://ciao.kitchen/gua-bao/' },
   { name: 'Fruit Love Life (果果愛)', url: 'https://fruitlovelife.com/post-f1131201/' },
   { name: 'Chang Beef Noodles (牛肉麵)', url: 'https://auntie.tw/chang-beef-noodles/' }

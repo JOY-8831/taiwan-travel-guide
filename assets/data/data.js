@@ -3,8 +3,8 @@ export const wishes = [
   // --- 台灣核心體驗 (Category: E) ---
   {
     Code: "P-E---1",
-    Name_EN: "Night Market Culture",
-    Name_CH: "夜市文化",
+    Name_EN: "Night Market",
+    Name_CH: "夜市",
     City: "Taiwan",
     Details: "Vibrant hubs of street food, shopping, and games. Examples: Ningxia (Taipei), Liuhe (Kaohsiung), Fengjia (Taichung).",
     Special: "Foodie Paradise",
@@ -15,8 +15,8 @@ export const wishes = [
   },
   {
     Code: "P-E---2",
-    Name_EN: "Temple & Spiritual Heritage",
-    Name_CH: "廟宇文化",
+    Name_EN: "Temple",
+    Name_CH: "寺廟",
     City: "Taiwan",
     Details: "Architectural treasures reflecting a blend of Taoist, Buddhist, and folk beliefs. Examples: Longshan Temple, Fo Guang Shan.",
     Special: "Cultural Heart",
@@ -109,7 +109,7 @@ export const wishes = [
   { Code: "P-N-a-N-1", Name_EN: "Elephant Mountain (Xiangshan)", Name_CH: "象山", City: "Taipei", Details: "Offers the most famous panoramic view of Taipei 101 and the city.", Special: "Sunset views", Era: "Modern", Year: "1990s", Lat: 25.0277, Lng: 121.5721 },
   { Code: "P-N-a-N-2", Name_EN: "Yangmingshan National Park", Name_CH: "陽明山國家公園", City: "Taipei", Details: "Known forvolcanic landscapes, hot springs, and seasonal flowers.", Special: "Bathing in nature", Era: "Japanese", Year: "1937", Lat: 25.1775, Lng: 121.5475 },
   { Code: "P-N-a-N-3", Name_EN: "Mount Teapot (Teapot Mountain)", Name_CH: "茶壺山", City: "Taipei", Details: "A unique Peak offering breathtaking views of the northern coastline.", Special: "", Era: "Modern", Year: "1990s", Lat: 25.1064, Lng: 121.8657 },
-  { Code: "P-N-a-N-4", Name_EN: "Camphor Tree & Camphor Lake Trail", Name_CH: "樟樹樟湖步道", City: "Taipei", Details: "One can easily finish the route in an hour. Following the trail, you’ll see an old-time farmers’ village with all the facilities.", Special: "", Era: "Modern", Year: "2000s", Lat: 24.9690, Lng: 121.5882 },
+  { Code: "P-N-a-N-4", Name_EN: "Camphor Tree Trail", Name_CH: "樟樹樟湖步道", City: "Taipei", Details: "One can easily finish the route in an hour. You’ll see an old-time farmers’ village and talk with the locals.", Special: "", Era: "Modern", Year: "2000s", Lat: 24.9690, Lng: 121.5882 },
   { Code: "P-N-a-N-6", Name_EN: "Wufengqi Waterfalls", Name_CH: "五峰旗瀑布", City: "Yilan", Details: "If you like the mountains more, you can reach this lush forest from the coast in half hour. It is a three-tiered waterfall.", Special: "", Era: "Modern", Year: "1961", Lat: 24.8327, Lng: 121.7454 },
   { Code: "P-N-a-N-7", Name_EN: "Xian Dong Yan (Fairy Cave)", Name_CH: "仙洞巖", City: "Keelung", Details: "A natural sea-eroded cave. Inside, you'll find a temple built during the Qing Dynasty. Free entry.", Special: "", Era: "Modern", Year: "2016", Lat: 25.0440, Lng: 121.5360 },
   { Code: "P-N-a-SE-1", Name_EN: "Shoushan (Monkey Mountain)", Name_CH: "壽山", City: "Kaohsiung", Details: "Home to wild macaques and limestone caves with harbor views. The hotspring here is different from ", Special: "", Era: "Japanese", Year: "1923", Lat: 22.6386, Lng: 120.2650 },
@@ -280,13 +280,14 @@ export const foods = [
   { Code: "F-C-6", Name_EN: "Three-Cup Chicken", Name_CH: "三杯雞", City: "Taiwan", Details: "Named after its “three cups” of seasoning—soy sauce, rice wine, and sesame oil.", Special: "" },
   { Code: "F-C-7", Name_EN: "Small and Big Sausage", Name_CH: "大腸包小腸", City: "Taiwan", Details: "A grilled Taiwanese pork sausage wrapped in sticky rice, a flavorful street food.", Special: "" },
   // --- Vegetarian (Category: V) ---
-  { Code: "F-V-1", Name_EN: "Boiled Veggies", Name_CH: "燙青菜", City: "Taiwan", Details: "Seasonal vegetables blanched and served with soy sauce and garlic oil. Simple, fresh, and healthy.", Special: "" },
+  { Code: "F-V-1", Name_EN: "Vegan restaurants", Name_CH: "素食餐廳", City: "Taiwan", Details: "The abundance of vegetarian food here is deeply rooted in Buddhism. Therefore, there is no onions, garlic, leeks, chives, or scallions. It is believed that these ingredients can disturb one’s spiritual peace and stir up heavy emotions. But don't worry about the taste! Instead of garlic, we use high-quality soy sauce and various vegetables to create flavors that are incredibly clean, fresh, and satisfying.", Special: "" },
   { Code: "F-V-2", Name_EN: "Scallion Pancake", Name_CH: "蔥油餅", City: "Taiwan", Details: "I am not lying: The scallion in Taiwan is much flavorful than the ones in other countries! Made in this way, the pancake is flaky, crispy, and perfect with egg or cheese.", Special: "" },
   { Code: "F-V-3", Name_EN: "Sweet Potato Balls", Name_CH: "地瓜球", City: "Taiwan", Details: "Made from mashed sweet potato mixed with tapioca starch for that bouncy texture.", Special: "" },
   { Code: "F-V-4", Name_EN: "Veg Braised Pork Rice", Name_CH: "素滷肉飯", City: "Taiwan", Details: "Uses soy protein or mushrooms braised in soy sauce for a meaty texture.", Special: "" },
   { Code: "F-V-5", Name_EN: "Buddha’s Delight", Name_CH: "羅漢齋", City: "Taiwan", Details: "A Buddhist temple dish, cooked without onion or garlic because they are prohibited in Buddha vegetarian. It is a colorful mix of veggies and tofu.", Special: "" },
   { Code: "F-V-6", Name_EN: "Cold Noodles w/ Sesame", Name_CH: "麻醬麵", City: "Taiwan", Details: "Wheat noodles tossed in sesame paste, soy sauce, and vinegar. Perfect for humid summer.", Special: "" },
   { Code: "F-V-7", Name_EN: "Three Cups Eggplant", Name_CH: "三杯茄子", City: "Taiwan", Details: "A classic Taiwanese dish featuring eggplant braised in soy sauce, rice wine, and sesame oil.", Special: "" },
+  { Code: "F-V-8", Name_EN: "Boiled Veggies", Name_CH: "燙青菜", City: "Taiwan", Details: "Seasonal vegetables blanched and served with soy sauce and garlic oil. Simple, fresh, and healthy. Note: Some may add minced meat sauce on the top, you can show the owner '我吃素，不要加肉燥' (I am vegetarian, no meat sauce.)", Special: "" },
   // --- Muslim / Halal (Category: M) ---
   { Code: "F-M-1", Name_EN: "Halal Beef Noodle", Name_CH: "清真牛肉麵", City: "Taipei", Details: "Using beef shank and spice-rich broth. Certified shops serve this iconic dish. You can also find a mosque in Taipei city and many Muslims in Taiwan.", Special: "" },
   { Code: "F-M-2", Name_EN: "Lamb Hot Pot", Name_CH: "羊肉爐", City: "Taiwan", Details: "Lamb simmered with Chinese herbs for hours, perfect for winter.", Special: "" },

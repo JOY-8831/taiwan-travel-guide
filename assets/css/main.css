@@ -5,6 +5,7 @@
   --light_blue: #C3DFF1;
   --blue-very-light: #e3f2fd;
   --pink: #D18FA1;
+  --dark: #171717;
   --card-right-pad: 14px;
 }
 
@@ -145,7 +146,7 @@ body {
 .title {
   font-family: 'Jersey 15', sans-serif;
   font-size: clamp(2.2rem, 8vw, 2.8rem);
-  color: var(--dark_blue);
+  color: var(--vanilla);
   margin-bottom: 10px;
   line-height: 1.1;
 }

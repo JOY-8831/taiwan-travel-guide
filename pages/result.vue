@@ -120,103 +120,140 @@ const isEmpty = computed(() => {
 
 <style scoped>
 #result-page {
-  background-color: #f9f7f2;
+  background-color: #171717; /* Dark Grey (BG) */
+  min-height: 100vh;
+  color: #F3D5BA; /* Vanila */
+  font-family: 'Jersey 15', sans-serif;
+  display: flex;
+  flex-direction: column;
+  padding: 40px 0;
+  overflow-x: hidden;
 }
 
 .result-section {
-  margin-top: 0px; /* 🎯 Closer to previous element */
-  margin-bottom: 0px; /* 🎯 Tightened from 30px */
+  padding: 0 24px;
+}
+
+.section-title {
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 2rem;
+  line-height: 1.1;
+  font-weight: normal;
+  color: #F3D5BA;
 }
 
 .header-section {
-  margin-bottom: 0px; /* 🎯 Overriding main.css for tighter top */
+  padding: 0 24px;
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  font-family: 'Jersey 15', sans-serif;
+  font-size: 3rem;
+  line-height: 1.1;
+  margin: 0;
+  font-weight: normal;
+}
+
+.subtitle {
+  font-size: 1.4rem;
+  line-height: 1.2;
+  letter-spacing: 0.02em;
+  color: #D6D6D6; /* Light Grey */
+  margin: 0;
 }
 
 .tour-list {
   display: flex;
   flex-direction: column;
-  gap: 15px;
+  gap: 24px;
 }
 
 .tour-item {
-  background: white;
-  padding: 15px;
+  background: #C3DFF1; /* Light Blue for contrast */
+  padding: 20px;
   border-radius: 12px;
-  border: 4px solid var(--dark_blue); /* 🎯 Adjusted to 4px for consistency */
+  border: 4px solid var(--dark_blue);
   box-shadow: 4px 4px 0px rgba(0,0,0,0.1);
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 12px;
+  color: #001D62; /* Dark Blue text on Light Blue card */
 }
 
 .tour-name {
   font-family: 'Jersey 15', sans-serif;
-  font-size: 1.5rem;
-  color: var(--dark_blue);
+  font-size: 1.8rem;
+  line-height: 1;
   margin: 0;
+  font-weight: normal;
 }
 
 .tour-desc {
-  color: #555;
-  margin: 0;
   font-size: 1.1rem;
+  line-height: 1.3;
+  color: #001D62;
+  margin: 0;
 }
 
 .tour-spots {
-  margin-top: 5px;
-  padding-top: 10px;
-  border-top: 1px dashed #eee;
+  padding-top: 12px;
+  border-top: 2px dashed rgba(0, 29, 98, 0.2);
 }
 
 .spots-label {
   font-weight: bold;
-  font-size: 0.9rem;
-  color: var(--pink);
+  font-size: 1rem;
+  color: #D18FA1; /* Pink */
   display: block;
-  margin-bottom: 5px;
+  margin-bottom: 8px;
 }
 
 .spots-list {
-  list-style: none;
-  padding: 0;
+  list-style: disc;
+  padding-left: 20px;
   margin: 0;
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px 15px;
+  flex-direction: column;
+  gap: 4px;
 }
 
 .spot-item-mini {
-  font-size: 0.95rem;
-  color: #666;
-  display: flex;
-  align-items: center;
-  gap: 5px;
+  font-size: 1rem;
+  color: #001D62;
 }
 
 .spot-item-mini .ch-name {
-  font-size: 0.85rem;
-  color: #999;
+  font-size: 0.9rem;
+  opacity: 0.7;
+}
+
+.wishcard-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 20px;
 }
 
 .no-results {
   text-align: center;
-  padding: 40px;
-  background: white;
-  border-radius: 12px;
-  border: 4px dashed #ccc;
-  color: #999;
+  padding: 40px 24px;
+  color: #D6D6D6;
+  font-size: 1.4rem;
 }
 
 .button-container {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 20px; /* 🎯 Space between buttons */
-  margin-top: 40px;
-  flex-wrap: wrap; /* Important for mobile */
+  gap: 24px;
+  margin-top: 48px;
+  padding: 0 24px;
+  flex-wrap: wrap;
 }
 
-/* 🎯 Hide elements during capture if needed (optional) */
 @media print {
   .button-container {
     display: none;

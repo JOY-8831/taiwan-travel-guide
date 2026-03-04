@@ -1,7 +1,7 @@
 <!-- eslint-disable vue/multi-word-component-names -->
 <template>
   <div class="page-wrapper">
-    <BackButton />
+    <ButtonBack />
     <slot />
     <footer>
       <p>© 2025 Build Your Taiwan Journey | Created with ❤️ for travelers</p>
