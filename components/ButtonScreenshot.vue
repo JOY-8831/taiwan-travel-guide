@@ -36,16 +36,41 @@ const captureScreenshot = async () => {
     const canvas = await html2canvas(element, {
       useCORS: true,
       scale: 2, // Higher quality
-      backgroundColor: '#f9f7f2', // Match page background
+      backgroundColor: '#171717', // Match new dark page background
       logging: false,
     })
 
-    // Convert to image and download
-    const image = canvas.toDataURL('image/png')
-    const link = document.createElement('a')
-    link.href = image
-    link.download = `taiwan-journey-${new Date().getTime()}.png`
-    link.click()
+    // Convert to Blob for better mobile support
+    canvas.toBlob(async (blob) => {
+      if (!blob) return
+      
+      const fileName = `taiwan-journey-${new Date().getTime()}.png`
+      const file = new File([blob], fileName, { type: 'image/png' })
+
+      // Try Web Share API (Mobile standard)
+      if (navigator.share && navigator.canShare && navigator.canShare({ files: [file] })) {
+        try {
+          await navigator.share({
+            files: [file],
+            title: 'My Taiwan Journey',
+            text: 'Check out my planned trip to Taiwan!'
+          })
+          return // Success via share
+        } catch (err) {
+          console.log('Share failed, falling back to download', err)
+        }
+      }
+
+      // Fallback: Direct download
+      const image = URL.createObjectURL(blob)
+      const link = document.createElement('a')
+      link.href = image
+      link.download = fileName
+      document.body.appendChild(link)
+      link.click()
+      document.body.removeChild(link)
+      URL.revokeObjectURL(image)
+    }, 'image/png')
   } catch (error) {
     console.error('Screenshot failed:', error)
     alert('Failed to capture screenshot. Please try again.')

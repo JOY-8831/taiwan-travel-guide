@@ -409,7 +409,7 @@ const scrollToBottom = () => {
   width: 100%;
   display: flex;
   justify-content: center;
-  padding: 0 24px 16px;
+  padding: 24px 24px 16px; /* Increased from 0 to 24px top */
   box-sizing: border-box;
 }
 

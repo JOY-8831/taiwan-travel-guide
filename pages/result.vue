@@ -3,63 +3,65 @@
     <ButtonBack @click="router.push('/must-eat')" />
 
     <main id="result-content" class="frame">
-      <header class="header-section">
-        <h1 class="title">🎉 Your Taiwan Journey</h1>
-        <p class="subtitle">Here’s a summary of everything you’ve picked for your trip!</p>
-      </header>
+      <div id="capture-area">
+        <header class="header-section">
+          <h1 class="title">🎉 Your Taiwan Journey</h1>
+          <p class="subtitle">Here’s a summary of everything you’ve picked for your trip!</p>
+        </header>
 
-      <!-- Selected Tours Section -->
-      <section v-if="selectedToursData.length > 0" class="result-section">
-        <h2 class="section-title">🗺️ Selected Tours</h2>
-        <div class="tour-list">
-          <div v-for="tour in selectedToursData" :key="tour.id" class="tour-item">
-            <h3 class="tour-name">{{ tour.title }}</h3>
-            <p class="tour-desc">{{ tour.description }}</p>
-            
-            <!-- Spots Listing for each tour -->
-            <div class="tour-spots">
-              <span class="spots-label">Included spots:</span>
-              <ul class="spots-list">
-                <li v-for="code in tour.pointCodes" :key="code" class="spot-item-mini">
-                  {{ getPointInfo(code).Name_EN }}
-                  <span class="ch-name">(CH: {{ getPointInfo(code).Name_CH }})</span>
-                </li>
-              </ul>
+        <!-- Selected Tours Section -->
+        <section v-if="selectedToursData.length > 0" class="result-section">
+          <h2 class="section-title">🗺️ Selected Tours</h2>
+          <div class="tour-list">
+            <div v-for="tour in selectedToursData" :key="tour.id" class="tour-item">
+              <h3 class="tour-name">{{ tour.title }}</h3>
+              <p class="tour-desc">{{ tour.description }}</p>
+              
+              <!-- Spots Listing for each tour -->
+              <div class="tour-spots">
+                <span class="spots-label">Included spots:</span>
+                <ul class="spots-list">
+                  <li v-for="code in tour.pointCodes" :key="code" class="spot-item-mini">
+                    {{ getPointInfo(code).Name_EN }}
+                    <span class="ch-name">(CH: {{ getPointInfo(code).Name_CH }})</span>
+                  </li>
+                </ul>
+              </div>
             </div>
           </div>
-        </div>
-      </section>
+        </section>
 
-      <!-- Favorite Spots Section -->
-      <section v-if="favoriteSpots.length > 0" class="result-section">
-        <h2 class="section-title">📍 Favorite Spots</h2>
-        <div class="wishcard-grid">
-          <WishCard
-            v-for="item in favoriteSpots"
-            :key="item.Code"
-            :item="item"
-          />
-        </div>
-      </section>
+        <!-- Favorite Spots Section -->
+        <section v-if="favoriteSpots.length > 0" class="result-section">
+          <h2 class="section-title">📍 Favorite Spots</h2>
+          <div class="wishcard-grid">
+            <WishCard
+              v-for="item in favoriteSpots"
+              :key="item.Code"
+              :item="item"
+            />
+          </div>
+        </section>
 
-      <!-- Favorite Food Section -->
-      <section v-if="favoriteFood.length > 0" class="result-section">
-        <h2 class="section-title">🍲 Must-Eat Food</h2>
-        <div class="wishcard-grid">
-          <WishCard
-            v-for="item in favoriteFood"
-            :key="item.Code"
-            :item="item"
-          />
-        </div>
-      </section>
+        <!-- Favorite Food Section -->
+        <section v-if="favoriteFood.length > 0" class="result-section">
+          <h2 class="section-title">🍲 Must-Eat Food</h2>
+          <div class="wishcard-grid">
+            <WishCard
+              v-for="item in favoriteFood"
+              :key="item.Code"
+              :item="item"
+            />
+          </div>
+        </section>
 
-      <div v-if="isEmpty" class="no-results">
-        <p>You haven't picked anything yet! Go back and explore more.</p>
+        <div v-if="isEmpty" class="no-results">
+          <p>You haven't picked anything yet! Go back and explore more.</p>
+        </div>
       </div>
 
       <div class="button-container">
-        <ButtonScreenshot targetId="result-content" />
+        <ButtonScreenshot targetId="capture-area" />
         <ButtonNext
           text="Next: Watch a Video!"
           type="next"
