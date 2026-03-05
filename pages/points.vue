@@ -1,7 +1,6 @@
 <template>
   <div class="page-layout">
-    <ButtonBack />
-
+    <ButtonBack :dark="false" />
     <Transition name="page-slide" mode="out-in">
       <main v-if="userStyles.length > 0" :key="currentStepIndex" class="frame">
         
@@ -39,7 +38,7 @@
             </div>
             <div class="card-info">
               <h3 class="point-name">{{ point.Name_EN }}</h3>
-              <span class="city-tag">{{ point.City || 'Taiwan' }}</span>
+                <span class="city-tag">{{ point.City || 'Taiwan' }}</span>
             </div>
           </div>
         </section>
@@ -78,6 +77,7 @@
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import { wishes } from '~/assets/data/data.js'
+import AddToList from '~/components/AddToList.vue';
 
 const config = useRuntimeConfig()
 const baseURL = config.app.baseURL
