@@ -1,7 +1,8 @@
 <template>
   <section class="frame-border panel">
     <header class="panel-header">
-      <h1 :tabindex="focusable ? '-1' : undefined">{{ title }}</h1>
+      <h1 v-if="focusable" tabindex="-1">{{ title }}</h1>
+      <h1 v-else>{{ title }}</h1>
     </header>
     <div class="panel-body">
       <p>{{ description }}</p>

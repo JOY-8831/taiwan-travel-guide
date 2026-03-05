@@ -1,31 +1,29 @@
 <template>
-  <ClientOnly>
-    <div class="onboarding-container" @click.stop>
-      <!-- Background Overlay with Cut-out -->
-      <div 
-        class="onboarding-overlay" 
-        :style="overlayStyle"
-      ></div>
+  <div v-if="isMounted && isReady" class="onboarding-container" @click.stop>
+    <!-- Background Overlay with Cut-out -->
+    <div 
+      class="onboarding-overlay" 
+      :style="overlayStyle"
+    ></div>
 
-      <!-- Instruction Box -->
-      <div 
-        ref="boxRef"
-        class="guide-box" 
-        :style="boxStyle"
-      >
-        <div class="guide-content">
-          <p class="guide-text">{{ currentStepText }}</p>
-        </div>
-        
-        <div class="guide-footer">
-          <button class="custom-got-it" @click="nextStep">Got it!</button>
-        </div>
-        
-        <!-- Arrow pointing to target -->
-        <div class="guide-arrow" :class="arrowClass" :style="arrowStyle"></div>
+    <!-- Instruction Box -->
+    <div 
+      ref="boxRef"
+      class="guide-box" 
+      :style="boxStyle"
+    >
+      <div class="guide-content">
+        <p class="guide-text">{{ currentStepText }}</p>
       </div>
+      
+      <div class="guide-footer">
+        <button class="custom-got-it" @click="nextStep">Got it!</button>
+      </div>
+      
+      <!-- Arrow pointing to target -->
+      <div class="guide-arrow" :class="arrowClass" :style="arrowStyle"></div>
     </div>
-  </ClientOnly>
+  </div>
 </template>
 
 <script setup lang="ts">
@@ -42,6 +40,8 @@ const emit = defineEmits<{
 const currentIndex = ref(0)
 const targetRect = ref<DOMRect | null>(null)
 const boxRef = ref<HTMLElement | null>(null)
+const isReady = ref(false)
+const isMounted = ref(false) // For hydration safety
 
 const currentStepText = computed(() => props.steps?.[currentIndex.value]?.text || '')
 
@@ -49,25 +49,29 @@ const updatePosition = () => {
   const step = props.steps?.[currentIndex.value]
   if (!step) return
 
+  if (step.position === 'center') {
+    targetRect.value = null
+    nextTick(() => { isReady.value = true })
+    return
+  }
+
   const el = document.querySelector(step.target)
   if (el) {
     const rect = el.getBoundingClientRect()
-    // 🎯 Only set if rect has non-zero size/position to avoid top-left glitch
     if (rect.width > 0 || rect.height > 0) {
       targetRect.value = rect
+      nextTick(() => { isReady.value = true })
     } else {
-      // Retry in a bit if zero (maybe rendering hasn't finished)
       setTimeout(updatePosition, 100)
     }
   } else {
-    targetRect.value = null
-    // Retry finding element if not found yet (async data loading)
     setTimeout(updatePosition, 200)
   }
 }
 
 const nextStep = () => {
   if (currentIndex.value < props.steps.length - 1) {
+    targetRect.value = null // Clear previous rect to avoid jumping
     currentIndex.value++
     // Position will update via watch
   } else {
@@ -76,6 +80,7 @@ const nextStep = () => {
 }
 
 onMounted(() => {
+  isMounted.value = true
   updatePosition()
   window.addEventListener('resize', updatePosition)
   window.addEventListener('scroll', updatePosition)
@@ -100,7 +105,8 @@ const overlayStyle = computed(() => {
   
   return {
     backgroundColor: 'transparent',
-    backgroundImage: `radial-gradient(circle at ${centerX}px ${centerY}px, transparent ${radius}px, rgba(0,0,0,0.7) ${radius + 5}px)`
+    backgroundImage: `radial-gradient(circle at ${centerX}px ${centerY}px, transparent ${radius}px, rgba(0,0,0,0.7) ${radius + 5}px)`,
+    transition: currentIndex.value === 0 ? 'none' : 'background-image 0.4s ease'
   }
 })
 
@@ -150,7 +156,8 @@ const boxStyle = computed(() => {
     top: `${bTop}px`,
     left: `${bLeft}px`,
     transform,
-    position: 'fixed' as const
+    position: 'fixed' as const,
+    transition: currentIndex.value === 0 ? 'none' : 'top 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), left 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)'
   }
 })
 
@@ -167,7 +174,8 @@ const arrowStyle = computed(() => {
     const offset = (left + width/2) - bLeft
     return {
       left: `calc(50% + ${offset}px)`, // Adjust based on transition
-      display: 'block'
+      display: 'block',
+      transition: currentIndex.value === 0 ? 'none' : 'left 0.4s cubic-bezier(0.2, 0.8, 0.2, 1)'
     }
   } else if (pos === 'right') {
     return {
@@ -206,7 +214,7 @@ const arrowStyle = computed(() => {
   left: 0;
   width: 100%;
   height: 100%;
-  transition: background-image 0.3s ease;
+  transition: background-image 0.4s ease;
 }
 
 .guide-box {
@@ -218,8 +226,8 @@ const arrowStyle = computed(() => {
   flex-direction: column;
   gap: 15px;
   box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-  animation: pop-in 0.3s ease-out;
   z-index: 10001;
+  /* Removed animation: pop-in to prevent transform conflicts */
 }
 
 .guide-text {
@@ -270,8 +278,5 @@ const arrowStyle = computed(() => {
   border-top: 10px solid var(--dark_blue);
 }
 
-@keyframes pop-in {
-  from { transform: scale(0.9); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
-}
+/* Removed pop-in animation to avoid transform conflicts */
 </style>

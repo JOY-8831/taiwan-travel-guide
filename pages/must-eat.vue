@@ -9,13 +9,15 @@
       />
       
       <section id="eat_list">
-        <div class="wishcard-grid">
-          <WishCard
-            v-for="item in mustEatList"
-            :key="item.Code"
-            :item="item"
-          />
-        </div>
+        <ClientOnly>
+          <div class="wishcard-grid">
+            <WishCard
+              v-for="item in mustEatList"
+              :key="item.Code"
+              :item="item"
+            />
+          </div>
+        </ClientOnly>
       </section>
       
       <div class="button-container">

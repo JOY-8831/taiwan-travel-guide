@@ -46,13 +46,13 @@
             </div>
 
             <div class="modal-source-info">
-                <p class="source-label">Find the closest ones to me:</p>
+                <!-- <p class="source-label">Find the closest ones to me:</p> -->
                 <a 
                     :href="googleMapsUrl" 
                     target="_blank" 
                     class="source-name"
                 >
-                    Go to Google Map
+                    Find the nearby ones on Google Map
                 </a>
             </div>
 
@@ -294,7 +294,7 @@ const structuredDetails = computed(() => {
 
 .modal-title {
     font-family: 'Jersey 15', sans-serif;
-    font-size: 1.5rem; /* 🎯 Adjusted to 1.5rem per user request */
+    font-size: 1.8rem; /* Increased to 1.8rem per user request */
     font-weight: normal; /* 🎯 Not bold per user request */
     color: var(--dark_blue);
     margin: 0;
@@ -434,10 +434,11 @@ const structuredDetails = computed(() => {
 }
 
 .source-label {
-    font-size: 14px; /* 🎯 Fix: Increase font size */
+    font-size: 1.1rem; /* Matched to source-name */
     line-height: 1.4;
     letter-spacing: 0.02em;
     color: var(--blue); /* #5C8AA7 */
+    font-weight: normal; /* Removed bold */
 }
 
 .source-name {
@@ -448,6 +449,7 @@ const structuredDetails = computed(() => {
     letter-spacing: 0.02em;
     text-decoration-line: underline;
     color: var(--blue);
+    font-weight: normal; /* Removed bold */
 }
 
 /* ------------------- 說明區塊 ------------------- */

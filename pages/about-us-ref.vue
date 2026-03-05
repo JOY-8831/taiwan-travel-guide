@@ -137,9 +137,12 @@ const goBack = () => {
         </div>
       </div>
 
-      <div class="button-container">
-        <button class="option-btn primary" @click="goBack">› Back to Menu</button>
-      </div>
+      <section class="options">
+        <OptionSingle
+          text="› Back to Menu"
+          @click="goBack"
+        />
+      </section>
     </main>
   </div>
 </template>
@@ -148,13 +151,14 @@ const goBack = () => {
 #about-us-ref-page.page-layout {
   min-height: 100vh;
   padding: 80px 20px;
+  background-color: #171717; /* Dark background per tours.vue */
 }
 
 .bg-start {
-  background-image: url('~/assets/images/start.png');
-  background-attachment: fixed;
-  background-size: cover;
+  position: relative;
 }
+
+/* Background image removed per user request for dark theme */
 
 .combined-content {
   display: flex;

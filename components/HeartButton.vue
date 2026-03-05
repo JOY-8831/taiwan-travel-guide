@@ -1,13 +1,30 @@
+<script setup lang="ts">
+import { ref, onMounted } from 'vue'
+
+const props = defineProps<{
+  active: boolean
+}>()
+
+defineEmits<{
+  (e: 'toggle'): void
+}>()
+
+const isMounted = ref(false)
+onMounted(() => {
+  isMounted.value = true
+})
+</script>
+
 <template>
   <button
     class="heart-btn"
-    :class="{ 'active': active }"
+    :class="{ 'active': isMounted && active }"
     type="button"
-    :aria-pressed="active ? 'true' : 'false'"
+    :aria-pressed="isMounted && active ? 'true' : 'false'"
     aria-label="Toggle favorite"
     @click.stop="$emit('toggle')"
   >
-    <svg v-show="!active" width="32" height="32" viewBox="0 0 16 14" aria-hidden="true" class="icon-outline">
+    <svg v-show="!(isMounted && active)" width="32" height="32" viewBox="0 0 16 14" aria-hidden="true" class="icon-outline">
       <g>
         <rect x="8.70996" y="1.45158" width="1.45166" height="1.45166" />
         <rect x="10.1616" y="0.000137329" width="1.45166" height="1.45166" />
@@ -35,7 +52,7 @@
         <rect x="7.2583" y="11.6136" width="1.45166" height="1.45166" />
       </g>
     </svg>
-    <svg v-show="active" width="32" height="32" viewBox="0 0 20 16" aria-hidden="true" class="icon-filled">
+    <svg v-show="isMounted && active" width="32" height="32" viewBox="0 0 20 16" aria-hidden="true" class="icon-filled">
       <g>
         <rect x="10.6667" y="1.77771" width="1.77778" height="1.77778" fill="#D18FA1"/>
         <rect x="12.4446" width="1.77778" height="1.77778" fill="#D18FA1"/>
@@ -75,16 +92,6 @@
     </svg>
   </button>
 </template>
-
-<script setup lang="ts">
-defineProps<{
-  active: boolean
-}>()
-
-defineEmits<{
-  (e: 'toggle'): void
-}>()
-</script>
 
 <style scoped>
 .heart-btn {

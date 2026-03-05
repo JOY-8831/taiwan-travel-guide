@@ -34,25 +34,29 @@
         <!-- Favorite Spots Section -->
         <section v-if="favoriteSpots.length > 0" class="result-section">
           <h2 class="section-title">📍 Favorite Spots</h2>
-          <div class="wishcard-grid">
-            <WishCard
-              v-for="item in favoriteSpots"
-              :key="item.Code"
-              :item="item"
-            />
-          </div>
+          <ClientOnly>
+            <div class="wishcard-grid">
+              <WishCard
+                v-for="item in favoriteSpots"
+                :key="item.Code"
+                :item="item"
+              />
+            </div>
+          </ClientOnly>
         </section>
 
         <!-- Favorite Food Section -->
         <section v-if="favoriteFood.length > 0" class="result-section">
           <h2 class="section-title">🍲 Must-Eat Food</h2>
-          <div class="wishcard-grid">
-            <WishCard
-              v-for="item in favoriteFood"
-              :key="item.Code"
-              :item="item"
-            />
-          </div>
+          <ClientOnly>
+            <div class="wishcard-grid">
+              <WishCard
+                v-for="item in favoriteFood"
+                :key="item.Code"
+                :item="item"
+              />
+            </div>
+          </ClientOnly>
         </section>
 
         <div v-if="isEmpty" class="no-results">
