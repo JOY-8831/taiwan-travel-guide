@@ -1,0 +1,1 @@
+import{_ as a}from"./DTLXx_3i.js";import{_ as n,z as s,A as _,D as c,a8 as l,B as o}from"./Djq8G2-s.js";const d={},u={class:"page-wrapper"};function f(t,e){const r=a;return _(),s("div",u,[c(r),l(t.$slots,"default"),e[0]||(e[0]=o("footer",null,[o("p",null,"© 2025 Build Your Taiwan Journey | Created with ❤️ for travelers")],-1))])}const m=n(d,[["render",f]]);export{m as default};
