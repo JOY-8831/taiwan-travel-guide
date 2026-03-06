@@ -61,7 +61,7 @@
           <div class="tour-flow">
             <template v-for="(code, index) in tour.pointCodes" :key="code">
               <!-- Spot Card -->
-              <div class="spot-card" :style="{ borderColor: getEraColor(code) }">
+              <div class="spot-card" :style="{ borderColor: getStyleColor(code.split('-')[1] || 'C') }">
                 <div class="spot-img-container">
                   <img 
                     :src="getImgSrc(code)" 
@@ -235,17 +235,17 @@ const getPointInfo = (code: string | undefined): Partial<Wish> => {
 };
 
 
-const getEraColor = (code: string): string => {
-  const spot = getPointInfo(code);
-  const eraColors: Record<string, string> = {
-    'Modern': '#5C8AA7',
-    'Japanese': '#CC9665',
-    'Qing': '#D18FA1',
-    'Discovery': '#8EB16E',
-    'Indigenous': '#8EB16E'
-  };
-  return eraColors[(spot as Wish).Era] ?? '#5C8AA7';
-};
+// const getEraColor = (code: string): string => {
+//   const spot = getPointInfo(code);
+//   const eraColors: Record<string, string> = {
+//     'Modern': '#5C8AA7',
+//     'Japanese': '#CC9665',
+//     'Qing': '#D18FA1',
+//     'Discovery': '#8EB16E',
+//     'Indigenous': '#8EB16E'
+//   };
+//   return eraColors[(spot as Wish).Era] ?? '#5C8AA7';
+// };
 
 const getStyleColor = (style: string) => {
   const colors: Record<string, string> = {
@@ -580,7 +580,7 @@ const scrollToBottom = () => {
 .spot-brief-small {
   font-size: 1rem;
   line-height: 1.2;
-  color: #656669;
+  color: #464749;
   margin: 0;
   overflow: visible;
 }
